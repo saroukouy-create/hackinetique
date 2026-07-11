@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hackinétique · Formation en Hacking Éthique · CJEPE-BENIN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Segoe+UI:wght@300;400;600;700;800&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+        
+        .mono { font-family: 'Roboto Mono', monospace; }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin: auto;
+            height: 350px;
+        }
+        
+        .gradient-hero {
+            background: linear-gradient(135deg, #0b1e3a 0%, #1d4ed8 70%, #f59e0b 100%);
+        }
+        
+        .badge-level {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.8rem;
+            border-radius: 9999px;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        
+        .level-debutant { background: #dbeafe; color: #1e3a8a; }
+        .level-intermediaire { background: #fef3c7; color: #92400e; }
+        .level-avance { background: #fee2e2; color: #991b1b; }
+        .level-expert { background: #1e293b; color: #f8fafc; }
+        
+        .pill-vm {
+            background: #0f172a;
+            color: #e2e8f0;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.7rem;
+            border-radius: 9999px;
+            display: inline-block;
+        }
+        
+        .pill-institut {
+            background: #f59e0b;
+            color: #0b1e3a;
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 0.2rem 1rem;
+            border-radius: 9999px;
+        }
+        
+        .btn-orange {
+            background-color: #f59e0b;
+            color: #0b1e3a;
+            font-weight: 700;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            transition: all 0.2s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-orange:hover {
+            background-color: #d97706;
+            transform: scale(1.02);
+        }
+        
+        .step-item {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid #1d4ed8;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .step-item:hover { background: #f8fafc; }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #1d4ed8;
+            color: white;
+            font-weight: 700;
+            font-size: 0.7rem;
+            min-width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 9999px;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+        .step-number.orange { background: #f59e0b; }
+        .step-number.red { background: #dc2626; }
+        .step-number.green { background: #059669; }
+        .step-number.purple { background: #7c3aed; }
+        
+        .accordion-content { display: none; }
+        .accordion-content.open { display: block; }
+        
+        .week-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        
+        .week-header {
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .week-header h4 { 
+            font-weight: 700; 
+            font-size: 1.05rem; 
+            margin: 0;
+        }
+        
+        .week-body { padding: 1.25rem; }
+        
+        .week-body .definition {
+            background: #f1f5f9;
+            padding: 1rem 1.25rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border-left: 4px solid #1d4ed8;
+        }
+        
+        .bloc-description {
+            background: #f8fafc;
+            padding: 1.25rem 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .bloc-description strong {
+            color: #1e40af;
+        }
+        
+        .bloc-toggle {
+            cursor: pointer;
+            user-select: none;
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            padding: 1.5rem;
+        }
+        .bloc-toggle:hover { background-color: #fffbeb; }
+        
+        code {
+            background: #e2e8f0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem 1.25rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin: 0.5rem 0;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: 0.85rem;
+        }
+        
+        .bg-blue-soft { background: #eff6ff; }
+        .bg-yellow-soft { background: #fffbeb; }
+        .bg-red-soft { background: #fef2f2; }
+        .bg-slate-soft { background: #f1f5f9; }
+        
+        .text-blue-dark { color: #1e40af; }
+        .text-yellow-dark { color: #92400e; }
+        .text-red-dark { color: #991b1b; }
+        
+        .info-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        .info-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e40af;
+            display: block;
+        }
+        .info-card .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #64748b;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .info-card.orange .number { color: #d97706; }
+        
+        .pill-module {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e3a8a;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15rem 0.7rem;
+            border-radius: 9999px;
+            margin-right: 0.3rem;
+        }
+        .pill-module.orange { background: #fef3c7; color: #92400e; }
+        .pill-module.red { background: #fee2e2; color: #991b1b; }
+        .pill-module.green { background: #d1fae5; color: #065f46; }
+        .pill-module.purple { background: #ede9fe; color: #5b21b6; }
+        
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .module-grid .pill-module {
+            text-align: center;
+            padding: 0.3rem 0.5rem;
+        }
+        
+        .objectives-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+        }
+        .objectives-list li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        .objectives-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #059669;
+            font-weight: 700;
+        }
+        
+        .analogy-box {
+            background: #f0f7ff;
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-left: 4px solid #f59e0b;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+        .analogy-box strong {
+            color: #1e40af;
+            font-style: normal;
+        }
+        
+        .phase-header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .phase-header h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0;
+        }
+        .phase-header p {
+            color: #bfdbfe;
+            margin: 0.3rem 0 0 0;
+            font-size: 0.95rem;
+        }
+        
+        .glossary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        .glossary-table th {
+            background: #1e3a5f;
+            color: white;
+            padding: 0.6rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        .glossary-table td {
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .glossary-table tr:nth-child(even) { background: #f8fafc; }
+        
+        .extensions-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            background: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        .extensions-table th {
+            background: #1e3a5f;
+            color: white;
+            padding: 0.5rem 0.8rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        .extensions-table td {
+            padding: 0.5rem 0.8rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .extensions-table tr:nth-child(even) { background: #f8fafc; }
+        
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+            margin: 0.5rem 0;
+        }
+        .pillar-item {
+            background: #dbeafe;
+            color: #1e3a8a;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
+        .attack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .attack-item {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.4rem 0.6rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .tool-item {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 0.4rem 0.6rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .tree-structure {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            margin: 0.5rem 0;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 640px) {
+            .week-header { flex-direction: column; align-items: flex-start; }
+            .step-item { flex-wrap: wrap; }
+            .module-grid { grid-template-columns: 1fr 1fr; }
+            .glossary-table, .extensions-table { font-size: 0.75rem; }
+            .glossary-table td, .glossary-table th, .extensions-table td, .extensions-table th { padding: 0.4rem 0.5rem; }
+            .pillar-grid { grid-template-columns: 1fr 1fr; }
+            .attack-grid { grid-template-columns: 1fr 1fr; }
+            .tool-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-2 border-orange-400">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="p-2 bg-blue-900 text-white rounded-lg font-bold text-lg">🛡️</span>
+                <span class="font-bold text-xl text-blue-900 tracking-tight uppercase">Hackinétique</span>
+                <span class="pill-institut">CJEPE-BENIN</span>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm font-medium">
+                <a href="#overview" class="hover:text-orange-500 transition">Vue d'ensemble</a>
+                <a href="#fondamentaux" class="hover:text-orange-500 transition">Fondamentaux</a>
+                <a href="#programme" class="hover:text-orange-500 transition">Programme</a>
+                <a href="#defense" class="hover:text-orange-500 transition">Défense</a>
+                <a href="#inscription" class="btn-orange text-sm">S'inscrire</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+
+        <!-- ==================== SECTION 1 : OVERVIEW ==================== -->
+        <section id="overview" class="mb-12">
+            <div class="gradient-hero rounded-3xl p-1 shadow-2xl">
+                <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-6 md:p-10">
+                    <div class="md:flex items-center gap-8">
+                        <div class="md:w-3/5">
+                            <div class="flex items-center gap-3 mb-4 flex-wrap">
+                                <span class="bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full">CJEPE-BENIN</span>
+                                <span class="bg-orange-400 text-blue-900 text-xs font-bold px-3 py-1 rounded-full">FORMATION PROFESSIONNELLE</span>
+                            </div>
+                            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">
+                                DEVIENS <br />
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-orange-500">EXPERT EN HACKING ÉTHIQUE</span>
+                            </h1>
+                            <p class="text-lg text-slate-600 mt-4 leading-relaxed">
+                                Ce programme de <strong>6 mois (24 semaines)</strong> est structuré pour transformer un profil débutant en un technicien opérationnel.
+                                Nous privilégions exclusivement l'environnement <strong>VS Code</strong> pour le développement et l'automatisation,
+                                associé à des <strong>machines virtuelles Linux (Ubuntu, Kali, Debian)</strong> pour une sécurité maximale et une immersion totale.
+                                Chaque module alterne théorie et pratique en laboratoire.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                                <div class="info-card">
+                                    <span class="number">6</span>
+                                    <span class="label">Mois</span>
+                                </div>
+                                <div class="info-card">
+                                    <span class="number">70%</span>
+                                    <span class="label">Pratique Lab</span>
+                                </div>
+                                <div class="info-card orange">
+                                    <span class="number">20.000</span>
+                                    <span class="label">Inscription</span>
+                                </div>
+                                <div class="info-card orange">
+                                    <span class="number">350.000</span>
+                                    <span class="label">Formation</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="pill-vm">🐧 Ubuntu</span>
+                                <span class="pill-vm">🐧 Kali</span>
+                                <span class="pill-vm">🐧 Debian</span>
+                                <span class="pill-vm" style="background:#2563eb;">▸ VS Code</span>
+                                <span class="pill-vm" style="background:#f59e0b; color:#0b1e3a;">📦 Modules : Web · Réseaux · Outils</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <span class="pill-module">🌐 Sécurité Web</span>
+                                <span class="pill-module orange">🔌 Réseaux & Systèmes</span>
+                                <span class="pill-module red">🛠️ Outils Cyber</span>
+                                <span class="pill-module green">🛡️ Défense</span>
+                                <span class="pill-module purple">🐍 Python</span>
+                            </div>
+                        </div>
+                        <div class="md:w-2/5 mt-6 md:mt-0">
+                            <h3 class="text-center font-bold text-slate-800 mb-2">Équilibre des Domaines</h3>
+                            <div class="chart-container">
+                                <canvas id="balanceChart"></canvas>
+                            </div>
+                            <div class="mt-4 bg-slate-50 p-3 rounded-xl border border-slate-200 text-center text-sm">
+                                <span class="font-bold">📞 Cotonou :</span> +229 0140 3210 84 &nbsp;|&nbsp; +229 0153 201003
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : PRÉSENTATION GÉNÉRALE ==================== -->
+        <section id="presentation" class="mb-12">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Présentation générale du programme</h2>
+                <p class="text-lg text-slate-700 leading-relaxed mb-4">
+                    <strong>HACKINÉTIQUE</strong> est un parcours de formation progressif conçu pour amener un débutant complet, n'ayant jamais programmé ni configuré un système, jusqu'au niveau d'un analyste junior en cybersécurité capable d'auditer, de défendre et de documenter un système d'information réel. Le programme s'étale sur <strong>24 semaines</strong>, réparties en <strong>4 phases cumulatives</strong> : chaque phase s'appuie sur les compétences acquises dans la précédente.
+                </p>
+                <p class="text-lg text-slate-700 leading-relaxed">
+                    La logique pédagogique est <strong>« construire → casser → défendre → documenter »</strong>, comme dans les certifications internationales (CompTIA Security+, eJPT, CEH).
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                        <h4 class="font-bold text-blue-800 mb-3">🎯 Public cible</h4>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li>• Étudiants en informatique, réseaux ou télécommunications.</li>
+                            <li>• Jeunes diplômés en reconversion professionnelle.</li>
+                            <li>• Passionnés autodidactes avec un ordinateur personnel.</li>
+                            <li>• Membres du CJEPE-Bénin souhaitant développer une compétence technique.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-orange-50 rounded-xl p-6 border border-orange-100">
+                        <h4 class="font-bold text-orange-800 mb-3">📋 Prérequis</h4>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li>• <strong>Aucun prérequis technique</strong> : programme niveau zéro.</li>
+                            <li>• Ordinateur avec <strong>8 Go de RAM</strong> minimum.</li>
+                            <li>• Connexion internet stable.</li>
+                            <li>• Niveau de lecture en <strong>anglais technique</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-slate-50 rounded-xl p-6 border border-slate-200">
+                    <h4 class="font-bold text-slate-800 mb-3">🎯 Objectifs globaux</h4>
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li>• Maîtriser Linux et le développement web (HTML/CSS).</li>
+                            <li>• Comprendre l'architecture des réseaux (TCP/IP, DNS, HTTP).</li>
+                        </ul>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li>• Utiliser les outils de test d'intrusion (Nmap, Metasploit, SQLmap).</li>
+                            <li>• Mettre en place une défense (SIEM, IDS) et produire des rapports.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <h4 class="font-bold text-slate-800 mb-3">📖 Glossaire de démarrage</h4>
+                    <div class="overflow-x-auto">
+                        <table class="glossary-table">
+                            <thead>
+                                <tr>
+                                    <th>Terme</th>
+                                    <th>Explication simple</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Système d'exploitation (OS)</strong></td><td>Le programme principal qui fait fonctionner un ordinateur (Windows, macOS, Linux).</td></tr>
+                                <tr><td><strong>Terminal</strong></td><td>Une fenêtre où l'on tape des commandes en texte. L'outil de travail principal d'un informaticien de sécurité.</td></tr>
+                                <tr><td><strong>Machine virtuelle (VM)</strong></td><td>Un « ordinateur dans l'ordinateur » : logiciel qui simule un second ordinateur complet, isolé du vôtre.</td></tr>
+                                <tr><td><strong>Réseau</strong></td><td>L'ensemble des connexions qui permettent à des ordinateurs de communiquer entre eux.</td></tr>
+                                <tr><td><strong>Serveur</strong></td><td>Un ordinateur qui « sert » des informations à d'autres ordinateurs.</td></tr>
+                                <tr><td><strong>Vulnérabilité</strong></td><td>Une faiblesse dans un logiciel ou une configuration qui pourrait être exploitée.</td></tr>
+                                <tr><td><strong>Exploit</strong></td><td>Une méthode qui profite d'une vulnérabilité pour obtenir un résultat.</td></tr>
+                                <tr><td><strong>Hacking éthique</strong></td><td>Tester la sécurité d'un système avec autorisation, dans le but de le protéger.</td></tr>
+                                <tr><td><strong>CTF (Capture The Flag)</strong></td><td>Un jeu-concours de cybersécurité pour s'entraîner sans risque.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : VS CODE ENVIRONNEMENT ==================== -->
+        <section id="vscode" class="mb-12">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Environnement de travail unifié : Visual Studio Code</h2>
+                <p class="text-lg text-slate-700 leading-relaxed mb-4">
+                    L'ensemble du programme repose sur <strong>un seul environnement, VS Code</strong>, utilisé du premier jour jusqu'à la soutenance. Que ce soit pour écrire du HTML, exécuter des commandes Linux, développer en Python, se connecter à une machine Kali, tester une injection SQL ou rédiger un rapport, tout se fait depuis la même fenêtre.
+                </p>
+                <div class="analogy-box">
+                    <strong>🔨 Analogie — VS Code comme établi d'artisan</strong><br />
+                    <em>Un menuisier débutant n'a pas besoin de dix ateliers différents : il a besoin d'un seul établi bien organisé. VS Code joue ce rôle : le terminal, l'éditeur de code, le client SSH et les extensions y sont tous rangés au même endroit.</em>
+                </div>
+
+                <h4 class="font-bold text-slate-800 mt-6 mb-3">Extensions VS Code indispensables</h4>
+                <div class="overflow-x-auto">
+                    <table class="extensions-table">
+                        <thead>
+                            <tr>
+                                <th>Extension</th>
+                                <th>Utilité</th>
+                                <th>Dès</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>WSL</strong></td><td>Connecte VS Code au sous-système Linux sur Windows</td><td>Semaine 0</td></tr>
+                            <tr><td><strong>Remote - SSH</strong></td><td>Ouvre VS Code sur une machine distante via SSH</td><td>Semaine 3</td></tr>
+                            <tr><td><strong>Live Server</strong></td><td>Lance un site web local en un clic</td><td>Semaine 4</td></tr>
+                            <tr><td><strong>Prettier</strong></td><td>Met en forme automatiquement le code</td><td>Semaine 4</td></tr>
+                            <tr><td><strong>Python + Pylance</strong></td><td>Coloration syntaxique et autocomplétion Python</td><td>Semaine 9</td></tr>
+                            <tr><td><strong>GitLens</strong></td><td>Visualise l'historique des modifications</td><td>Semaine 9</td></tr>
+                            <tr><td><strong>REST Client</strong></td><td>Envoie des requêtes HTTP depuis VS Code</td><td>Semaine 15</td></tr>
+                            <tr><td><strong>Hex Editor</strong></td><td>Modifie le contenu binaire d'un fichier</td><td>Semaine 21</td></tr>
+                            <tr><td><strong>YAML</strong></td><td>Facilite l'écriture des fichiers de configuration</td><td>Semaine 19</td></tr>
+                            <tr><td><strong>Markdown All in One</strong></td><td>Rédige et prévisualise les rapports</td><td>Semaine 6</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : FONDAMENTAUX DU WEB ==================== -->
+        <section id="fondamentaux" class="mb-12">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Les fondamentaux du Web</h2>
+                <p class="text-lg text-slate-700 leading-relaxed mb-6">
+                    Avant de parler de cybersécurité, il faut comprendre le fonctionnement du Web.
+                </p>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3">🌐 Architecture Web</h4>
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li>• <strong>Client</strong> : navigateur (Chrome, Firefox, Edge)</li>
+                            <li>• <strong>Serveur</strong> : ordinateur qui héberge un site</li>
+                            <li>• <strong>DNS</strong> : traduit un nom de domaine en adresse IP</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li>• <strong>HTTP/HTTPS</strong> : protocole de communication (HTTPS chiffre les échanges)</li>
+                            <li>• <strong>API</strong> : permet aux applications de communiquer</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3">💻 Les technologies essentielles</h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="pill-module">HTML : structure</span>
+                    <span class="pill-module orange">CSS : mise en forme</span>
+                    <span class="pill-module red">JavaScript : interactivité</span>
+                    <span class="pill-module green">PHP/Python/Node.js : serveur</span>
+                    <span class="pill-module purple">SQL : bases de données</span>
+                </div>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Les fondamentaux de la cybersécurité</h2>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3">🏛️ Les cinq piliers</h4>
+                <div class="pillar-grid">
+                    <div class="pillar-item">1. Confidentialité</div>
+                    <div class="pillar-item">2. Intégrité</div>
+                    <div class="pillar-item">3. Disponibilité</div>
+                    <div class="pillar-item">4. Authentification</div>
+                    <div class="pillar-item">5. Traçabilité</div>
+                </div>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">⚔️ Types d'attaques</h4>
+                <div class="attack-grid">
+                    <span class="attack-item">Phishing</span>
+                    <span class="attack-item">Malware</span>
+                    <span class="attack-item">Ransomware</span>
+                    <span class="attack-item">Injection SQL</span>
+                    <span class="attack-item">XSS</span>
+                    <span class="attack-item">CSRF</span>
+                    <span class="attack-item">Force brute</span>
+                    <span class="attack-item">Man-in-the-Middle</span>
+                    <span class="attack-item">DDoS</span>
+                </div>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">🛠️ Outils courants</h4>
+                <div class="tool-grid">
+                    <span class="tool-item">Terminal Linux</span>
+                    <span class="tool-item">Git</span>
+                    <span class="tool-item">Python</span>
+                    <span class="tool-item">Wireshark</span>
+                    <span class="tool-item">Burp Suite</span>
+                    <span class="tool-item">Nmap</span>
+                    <span class="tool-item">Docker</span>
+                </div>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Pourquoi utiliser Ubuntu sous Windows ?</h2>
+                <p class="text-lg text-slate-700 leading-relaxed">
+                    Ubuntu offre un environnement Linux complet sans remplacer Windows grâce à <strong>WSL (Windows Subsystem for Linux)</strong>. VS Code se connecte directement à cet environnement Linux.
+                </p>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Installation pas à pas</h2>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3">Étape 1 : Installer VS Code</h4>
+                <p class="text-sm text-slate-700 mb-4">Téléchargez et installez Visual Studio Code depuis <a href="https://code.visualstudio.com" class="text-blue-600 hover:underline" target="_blank">code.visualstudio.com</a>.</p>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3">Étape 2 : Installer WSL</h4>
+                <p class="text-sm text-slate-700 mb-2">Ouvrir <strong>PowerShell en administrateur</strong> :</p>
+                <pre><code>wsl --install</code></pre>
+                <p class="text-sm text-slate-700 mt-2">Redémarrer le PC.</p>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">Étape 3 : Installer Ubuntu</h4>
+                <p class="text-sm text-slate-700 mb-2">Vérifier :</p>
+                <pre><code>wsl --list</code></pre>
+                <p class="text-sm text-slate-700 mb-2">Installer Ubuntu si nécessaire :</p>
+                <pre><code>wsl --install Ubuntu</code></pre>
+                <p class="text-sm text-slate-700 mt-2">Créer un utilisateur Linux et un mot de passe.</p>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">Étape 4 : Mettre Ubuntu à jour</h4>
+                <pre><code>sudo apt update
+sudo apt upgrade -y</code></pre>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">Étape 5 : Installer les outils</h4>
+                <pre><code>sudo apt install git curl wget unzip build-essential python3 python3-pip -y</code></pre>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">Étape 6 : Installer l'extension VS Code</h4>
+                <p class="text-sm text-slate-700">Dans VS Code : Extensions → Installer <strong>WSL</strong>.</p>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">Étape 7 : Ouvrir Ubuntu dans VS Code</h4>
+                <p class="text-sm text-slate-700">Depuis Ubuntu :</p>
+                <pre><code>code .</code></pre>
+                <p class="text-sm text-slate-700 mt-2">VS Code démarre directement dans l'environnement Linux.</p>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Structure d'un environnement de développement</h2>
+                <div class="tree-structure">
+                    Windows
+                    │
+                    ├── VS Code
+                    │
+                    ├── WSL
+                    │      │
+                    │      └── Ubuntu
+                    │             │
+                    │             ├── Git
+                    │             ├── Python
+                    │             ├── Node.js
+                    │             ├── Docker
+                    │             └── Outils de cybersécurité
+                </div>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Commandes Linux indispensables</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="pill-module">pwd</span>
+                    <span class="pill-module">ls</span>
+                    <span class="pill-module">cd</span>
+                    <span class="pill-module">mkdir</span>
+                    <span class="pill-module">touch</span>
+                    <span class="pill-module">cp</span>
+                    <span class="pill-module">mv</span>
+                    <span class="pill-module">rm</span>
+                    <span class="pill-module">cat</span>
+                    <span class="pill-module">nano</span>
+                    <span class="pill-module">sudo</span>
+                    <span class="pill-module">chmod</span>
+                    <span class="pill-module">find</span>
+                    <span class="pill-module">grep</span>
+                    <span class="pill-module">history</span>
+                </div>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Environnement idéal pour apprendre</h2>
+                <p class="text-sm text-slate-700 mb-4">Installez progressivement :</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="pill-module purple">Git</span>
+                    <span class="pill-module purple">Python</span>
+                    <span class="pill-module purple">Node.js</span>
+                    <span class="pill-module purple">Docker</span>
+                    <span class="pill-module purple">Burp Suite</span>
+                    <span class="pill-module purple">Wireshark</span>
+                    <span class="pill-module purple">Nmap</span>
+                    <span class="pill-module purple">VS Code</span>
+                    <span class="pill-module purple">Firefox Developer</span>
+                </div>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Parcours conseillé</h2>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1 ml-4">
+                    <li>Bases Linux</li>
+                    <li>Terminal Bash</li>
+                    <li>Git</li>
+                    <li>Réseaux TCP/IP</li>
+                    <li>HTML/CSS</li>
+                    <li>JavaScript</li>
+                    <li>Python</li>
+                    <li>SQL</li>
+                    <li>Docker</li>
+                    <li>Sécurité Web (OWASP Top 10)</li>
+                    <li>Tests d'intrusion en laboratoire</li>
+                    <li>Automatisation avec Python</li>
+                </ol>
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-xl mt-4">
+                    <p class="text-sm text-slate-700">⚠️ Effectuez toujours vos expérimentations de sécurité uniquement sur vos propres systèmes, des laboratoires de test ou des plateformes prévues à cet effet.</p>
+                </div>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Fondamentaux des réseaux et systèmes</h2>
+                <p class="text-lg text-slate-700 leading-relaxed">
+                    Comprendre les <strong>modèles OSI (7 couches)</strong> et <strong>TCP/IP (4 couches)</strong> est indispensable : physique, liaison, réseau (IP), transport (TCP/UDP), application (HTTP, DNS, SSH, etc.).
+                </p>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Architecture réseau</h2>
+                <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 ml-4">
+                    <li>Internet → Routeur → Pare-feu → Switch → Serveurs → Clients.</li>
+                    <li>Utiliser le plan d'adressage IP, les VLAN, le routage et le DNS pour sécuriser le réseau.</li>
+                </ul>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Sécurité système</h2>
+                <p class="text-sm text-slate-700">Mettre à jour Ubuntu, appliquer le principe du moindre privilège (<code>sudo</code>), utiliser SSH avec clés, configurer un pare-feu (UFW), surveiller les journaux (<code>journalctl</code>) et sauvegarder régulièrement.</p>
+
+                <hr class="my-8 border-slate-200" />
+
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Langages à maîtriser</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="pill-module">Bash (administration)</span>
+                    <span class="pill-module purple">Python (automatisation)</span>
+                    <span class="pill-module orange">PowerShell (Windows)</span>
+                    <span class="pill-module green">SQL</span>
+                    <span class="pill-module red">YAML (Docker/Kubernetes)</span>
+                    <span class="pill-module blue">HTML/CSS/JavaScript (Web)</span>
+                    <span class="pill-module purple">Go ou Rust (optionnel)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : OUTILS CYBERSÉCURITÉ ==================== -->
+        <section id="outils" class="mb-12">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Outils de cybersécurité et installation sur VS Code</h2>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3">1. Préparer l'environnement</h4>
+                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 ml-4">
+                    <li>Installer <strong>VS Code</strong>, <strong>WSL</strong> puis <strong>Ubuntu</strong>.</li>
+                    <li>Installer les extensions <em>Remote - WSL</em>, Python, Docker et GitHub.</li>
+                </ul>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">2. Installer Kali Linux</h4>
+                <p class="text-sm text-slate-700">Installer <strong>Kali Linux</strong> dans <strong>VirtualBox</strong>, <strong>VMware</strong> ou <strong>WSL</strong>. Kali intègre plus de 600 outils de sécurité.</p>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">3. Outils essentiels</h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">🔌 Réseau :</p>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            <span class="tool-item">Nmap</span>
+                            <span class="tool-item">Wireshark</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">🌐 Web :</p>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            <span class="tool-item">Burp Suite</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">🖥️ Système :</p>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            <span class="tool-item">John the Ripper</span>
+                            <span class="tool-item">Hashcat</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">⚙️ Autres :</p>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            <span class="tool-item">Python</span>
+                            <span class="tool-item">Bash</span>
+                            <span class="tool-item">Docker</span>
+                            <span class="tool-item">Git</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">4. Utilisation depuis VS Code</h4>
+                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 ml-4">
+                    <li>Ouvrir le terminal WSL/Kali (<code>Ctrl+`</code>).</li>
+                    <li>Installer les dépendances (<code>apt update && apt upgrade</code>).</li>
+                    <li>Travailler dans les dossiers Linux avec <code>code .</code>.</li>
+                    <li>Utiliser Git et Python pour automatiser.</li>
+                </ul>
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-xl mt-4">
+                    <p class="text-sm text-slate-700">⚠️ Utilisez ces outils uniquement sur des systèmes dont vous avez l'autorisation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : DÉFENSE & PROFESSIONNALISME ==================== -->
+        <section id="defense" class="mb-12">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Défense et professionnalisme — Blue Team, SIEM</h2>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3">🛡️ 1. Approche Blue Team</h4>
+                <p class="text-sm text-slate-700 leading-relaxed">
+                    La <strong>Blue Team</strong> défend les systèmes et réseaux contre les cybermenaces. Missions : surveillance, détection d'intrusions, réponse aux incidents, renforcement des systèmes.
+                </p>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">📊 2. Architecture d'un mini-SIEM</h4>
+                <p class="text-sm text-slate-700">Un <strong>SIEM</strong> centralise et analyse les logs :</p>
+                <div class="bg-slate-50 p-4 rounded-xl mt-2">
+                    <p class="text-sm text-slate-700">Architecture type :</p>
+                    <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1 ml-4">
+                        <li>Sources (serveurs, réseaux, applications)</li>
+                        <li>Collecteurs de logs (syslog, agents)</li>
+                        <li>Base de données</li>
+                        <li>Moteur d'analyse (corrélation d'événements)</li>
+                        <li>Dashboard de visualisation</li>
+                    </ol>
+                </div>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">💻 3. Mise en place dans VS Code</h4>
+                <p class="text-sm font-semibold text-slate-700 mb-2">Étape 1 : environnement</p>
+                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 ml-4">
+                    <li>Installer VS Code + WSL + Ubuntu</li>
+                    <li>Extensions : Python, Docker, Remote SSH</li>
+                </ul>
+
+                <p class="text-sm font-semibold text-slate-700 mt-4 mb-2">Étape 2 : collecte de logs (Python)</p>
+                <pre><code>import os
+
+with open("/var/log/syslog") as f:
+    logs = f.readlines()
+
+for log in logs:
+    if "error" in log.lower():
+        print(log)</code></pre>
+
+                <p class="text-sm font-semibold text-slate-700 mt-4 mb-2">Étape 3 : analyse SIEM simple</p>
+                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 ml-4">
+                    <li>Python pour parsing logs</li>
+                    <li>Elastic Stack (option avancée)</li>
+                    <li>Bash pour automatisation</li>
+                </ul>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">📁 4. Projet final Blue Team</h4>
+                <p class="text-sm text-slate-700">Créer un mini-SIEM local :</p>
+                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 ml-4">
+                    <li>Collecte logs Linux</li>
+                    <li>Détection d'anomalies</li>
+                    <li>Alertes automatisées</li>
+                    <li>Dashboard simple (Flask ou Node.js)</li>
+                </ul>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <span class="pill-module purple">Python (analyse)</span>
+                    <span class="pill-module orange">Bash (automation)</span>
+                    <span class="pill-module green">SQLite (stockage)</span>
+                    <span class="pill-module red">Flask (interface web)</span>
+                    <span class="pill-module blue">VS Code (IDE)</span>
+                </div>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">✅ 5. Bonnes pratiques</h4>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 ml-4">
+                        <li>Journalisation systématique</li>
+                        <li>Moindre privilège</li>
+                    </ul>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 ml-4">
+                        <li>Mises à jour régulières</li>
+                        <li>Segmentation réseau</li>
+                        <li>Analyse proactive des logs</li>
+                    </ul>
+                </div>
+
+                <h4 class="font-bold text-slate-800 text-xl mb-3 mt-6">🎯 6. Résultat attendu</h4>
+                <p class="text-sm text-slate-700">Un environnement Blue Team complet dans VS Code permettant surveillance, analyse de logs, détection d'incidents et visualisation des alertes.</p>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : PROGRAMME COMPLET ==================== -->
+        <section id="programme" class="mb-16">
+            <h2 class="text-3xl font-bold text-slate-900 mb-2">Programme détaillé par Phases</h2>
+            <p class="text-slate-500 mb-8 italic">
+                Cliquez sur une phase pour explorer les modules hebdomadaires.
+                <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded text-xs font-bold">Modules phares : Sécurité Web · Réseaux & Systèmes · Outils Cyber</span>
+            </p>
+
+            <div class="space-y-8">
+
+                <!-- ============================================================ -->
+                <!-- PHASE 1 : FONDAMENTAUX & SÉCURITÉ WEB (S1 à S6)               -->
+                <!-- ============================================================ -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button onclick="toggleBloc(1)" class="bloc-toggle hover:bg-orange-50 transition-colors flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg flex-shrink-0">01</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-800 uppercase">Fondamentaux & Sécurité Web</h3>
+                                <p class="text-sm text-slate-500">Semaines 1 à 6 · VS Code + Linux + HTML/CSS & attaques Web</p>
+                                <div class="flex flex-wrap gap-1 mt-1">
+                                    <span class="pill-module">🌐 Sécurité Web</span>
+                                    <span class="pill-module">💻 Fondamentaux</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="icon-1" class="text-2xl font-bold text-orange-500 ml-4">+</span>
+                    </button>
+                    <div id="bloc-1" class="accordion-content border-t border-slate-100 bg-slate-50/50 p-6">
+
+                        <div class="phase-header">
+                            <h3>📘 PHASE 01 · Semaines 1 à 6</h3>
+                            <p>Cette première phase construit le socle indispensable : maîtrise du terminal Linux, compréhension du fonctionnement d'un site web, et premières notions des attaques web.</p>
+                        </div>
+
+                        <div class="bloc-description">
+                            <strong>🎯 Objectifs pédagogiques</strong>
+                            <ul class="objectives-list mt-2">
+                                <li>Installer et configurer un environnement de travail Linux.</li>
+                                <li>Utiliser le terminal pour la navigation et la gestion de fichiers.</li>
+                                <li>Comprendre la structure d'une page web (HTML) et sa mise en forme (CSS).</li>
+                                <li>Identifier les vulnérabilités web selon l'OWASP Top 10.</li>
+                            </ul>
+                        </div>
+
+                        <!-- S1 -->
+                        <div class="week-card">
+                            <div class="week-header bg-blue-soft">
+                                <h4 class="text-blue-dark">S1 : Installation & environnement VS Code</h4>
+                                <span class="badge-level level-debutant">DÉBUTANT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Installation de VS Code + WSL2 (Windows) ou terminal natif (macOS). Prise en main de l'interface : explorateur, terminal intégré, palette de commandes.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Télécharger et installer VS Code.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Installer WSL2 sur Windows ou configurer le terminal natif sur macOS.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Prise en main de l'interface.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Ouvrir le terminal intégré.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Installer les extensions : WSL, Remote-SSH, Live Server, Prettier.</div>
+                                    <div class="step-item"><span class="step-number orange">6</span> Créer un fichier <code>index.html</code> pour tester.</div>
+                                    <div class="step-item"><span class="step-number red">7</span> Livrable : Environnement VS Code fonctionnel.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S2 -->
+                        <div class="week-card">
+                            <div class="week-header bg-blue-soft">
+                                <h4 class="text-blue-dark">S2 : Terminal Linux — bases</h4>
+                                <span class="badge-level level-debutant">DÉBUTANT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Navigation (cd, ls, pwd), gestion de fichiers (cp, mv, rm). Permissions (chmod, chown). Recherche (grep, find).</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Structure du système de fichiers.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Commandes de navigation.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Gestion des fichiers.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Permissions avec <code>chmod</code> et <code>chown</code>.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Recherche avec <code>grep</code> et <code>find</code>.</div>
+                                    <div class="step-item"><span class="step-number orange">6</span> Créer un mini-script bash.</div>
+                                    <div class="step-item"><span class="step-number red">7</span> Livrable : Mini-script bash fonctionnel.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S3 -->
+                        <div class="week-card">
+                            <div class="week-header bg-blue-soft">
+                                <h4 class="text-blue-dark">S3 : Terminal Linux — approfondissement</h4>
+                                <span class="badge-level level-debutant">DÉBUTANT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Gestion des processus (ps, top, kill). Variables d'environnement. Introduction à SSH.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Visualiser les processus avec <code>ps</code> et <code>top</code>.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Arrêter un processus avec <code>kill</code>.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Variables d'environnement.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Configurer <code>.bashrc</code> ou <code>.zshrc</code>.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Introduction à SSH.</div>
+                                    <div class="step-item"><span class="step-number orange">6</span> Se connecter à une machine distante.</div>
+                                    <div class="step-item"><span class="step-number red">7</span> Livrable : Connexion SSH réussie.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S4 -->
+                        <div class="week-card">
+                            <div class="week-header bg-yellow-soft">
+                                <h4 class="text-yellow-dark">S4 : Structurer une page web (HTML)</h4>
+                                <span class="badge-level level-debutant">DÉBUTANT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Balises sémantiques, formulaires, liens et images. Publication sur GitHub Pages.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Structure HTML.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Balises sémantiques.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Formulaires.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Liens et images.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Accessibilité.</div>
+                                    <div class="step-item"><span class="step-number orange">6</span> Publier sur GitHub Pages.</div>
+                                    <div class="step-item"><span class="step-number red">7</span> Livrable : Page web publiée.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S5 -->
+                        <div class="week-card">
+                            <div class="week-header bg-yellow-soft">
+                                <h4 class="text-yellow-dark">S5 : Mise en forme (CSS) & introduction aux attaques web</h4>
+                                <span class="badge-level level-debutant">DÉBUTANT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Sélecteurs CSS, Flexbox. Client/serveur, requêtes HTTP. Découverte de l'OWASP Top 10.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Sélecteurs CSS.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Flexbox.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Modèle client/serveur.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> OWASP Top 10.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Analyser les en-têtes HTTP.</div>
+                                    <div class="step-item"><span class="step-number orange">6</span> Fiche de synthèse sur 3 vulnérabilités.</div>
+                                    <div class="step-item"><span class="step-number red">7</span> Livrable : Fiche de synthèse.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S6 -->
+                        <div class="week-card">
+                            <div class="week-header bg-yellow-soft">
+                                <h4 class="text-yellow-dark">S6 : Projet de phase 1</h4>
+                                <span class="badge-level level-debutant">DÉBUTANT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Attaque guidée en laboratoire (OWASP WebGoat). Revue de code vulnérable. Présentation orale.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Mettre en place OWASP WebGoat.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Injection HTML simple.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Analyser le code vulnérable.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Documenter l'attaque.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Proposer des corrections.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Mini-rapport d'audit.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================ -->
+                <!-- PHASE 2 : RÉSEAUX & SYSTÈMES (S7 à S12)                        -->
+                <!-- ============================================================ -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button onclick="toggleBloc(2)" class="bloc-toggle hover:bg-orange-50 transition-colors flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg flex-shrink-0">02</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-800 uppercase">Réseaux & Systèmes</h3>
+                                <p class="text-sm text-slate-500">Semaines 7 à 12 · Architecture réseau, protocoles, sécurité système</p>
+                                <div class="flex flex-wrap gap-1 mt-1">
+                                    <span class="pill-module orange">🔌 Réseaux</span>
+                                    <span class="pill-module orange">🐍 Python</span>
+                                    <span class="pill-module orange">🛡️ Firewall</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="icon-2" class="text-2xl font-bold text-orange-500 ml-4">+</span>
+                    </button>
+                    <div id="bloc-2" class="accordion-content border-t border-slate-100 bg-slate-50/50 p-6">
+
+                        <div class="phase-header" style="background: linear-gradient(135deg, #78350f 0%, #d97706 100%);">
+                            <h3>📘 PHASE 02 · Semaines 7 à 12</h3>
+                            <p>Cette phase ouvre la « boîte noire » du réseau : comment les machines communiquent, comment un pare-feu filtre le trafic, et comment automatiser avec Python.</p>
+                        </div>
+
+                        <div class="bloc-description">
+                            <strong>🎯 Objectifs pédagogiques</strong>
+                            <ul class="objectives-list mt-2">
+                                <li>Décrire le modèle OSI/TCP-IP.</li>
+                                <li>Analyser un flux réseau avec Wireshark.</li>
+                                <li>Configurer un pare-feu.</li>
+                                <li>Écrire des scripts Python pour automatiser.</li>
+                            </ul>
+                        </div>
+
+                        <!-- S7 -->
+                        <div class="week-card">
+                            <div class="week-header bg-yellow-soft">
+                                <h4 class="text-yellow-dark">S7 : Modèle OSI et TCP/IP</h4>
+                                <span class="badge-level level-intermediaire">INTERMÉDIAIRE</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Les 7 couches OSI. Adressage IP, sous-réseaux, masques. Encapsulation.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Découvrir les 7 couches OSI.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Comparer avec TCP/IP.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Calculer des adresses IP.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Comprendre l'encapsulation.</div>
+                                    <div class="step-item"><span class="step-number red">5</span> Livrable : Schéma commenté.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S8 -->
+                        <div class="week-card">
+                            <div class="week-header bg-yellow-soft">
+                                <h4 class="text-yellow-dark">S8 : Protocoles fondamentaux</h4>
+                                <span class="badge-level level-intermediaire">INTERMÉDIAIRE</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> DNS, DHCP, HTTP/HTTPS, FTP. Capture avec Wireshark. Ports et services.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Comprendre le DNS.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Découvrir DHCP, HTTP, FTP.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Installer Wireshark.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Analyser des trames.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Associer ports et services.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Analyse Wireshark commentée.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S9 -->
+                        <div class="week-card">
+                            <div class="week-header bg-yellow-soft">
+                                <h4 class="text-yellow-dark">S9 : Python pour la sécurité</h4>
+                                <span class="badge-level level-intermediaire">INTERMÉDIAIRE</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Syntaxe Python, variables, boucles, fonctions. Bibliothèques requests, socket.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Syntaxe Python.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Boucles et conditions.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Fonctions et fichiers.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Utiliser <code>requests</code> et <code>socket</code>.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Script de scan de ports.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Script Python de scan de ports.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S10 -->
+                        <div class="week-card">
+                            <div class="week-header bg-yellow-soft">
+                                <h4 class="text-yellow-dark">S10 : Architecture réseau & simulation</h4>
+                                <span class="badge-level level-intermediaire">INTERMÉDIAIRE</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Plan d'adressage. Simulation avec Packet Tracer/GNS3. Routeurs, switchs, VLAN.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Concevoir un plan d'adressage.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Installer Packet Tracer.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Simuler un réseau.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Configurer des VLAN.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Tester la connectivité.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Schéma réseau simulé.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S11 -->
+                        <div class="week-card">
+                            <div class="week-header bg-yellow-soft">
+                                <h4 class="text-yellow-dark">S11 : Pare-feu et sécurité système</h4>
+                                <span class="badge-level level-intermediaire">INTERMÉDIAIRE</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Règles iptables. Durcissement Linux. Gestion des mises à jour.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Comprendre iptables.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Configurer des règles.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Utiliser UFW.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Durcir un système Linux.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Gérer les mises à jour.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Politique de pare-feu.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S12 -->
+                        <div class="week-card">
+                            <div class="week-header bg-yellow-soft">
+                                <h4 class="text-yellow-dark">S12 : Projet de phase 2</h4>
+                                <span class="badge-level level-intermediaire">INTERMÉDIAIRE</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Mini réseau sécurisé. Test de connectivité et de filtrage. Documentation technique.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Concevoir un mini réseau.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Configurer les machines.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Tester la connectivité.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Documenter l'architecture.</div>
+                                    <div class="step-item"><span class="step-number red">5</span> Livrable : Dossier technique complet.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================ -->
+                <!-- PHASE 3 : OUTILS DE CYBERSÉCURITÉ (S13 à S18)                  -->
+                <!-- ============================================================ -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button onclick="toggleBloc(3)" class="bloc-toggle hover:bg-orange-50 transition-colors flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg flex-shrink-0">03</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-800 uppercase">Outils de Cybersécurité</h3>
+                                <p class="text-sm text-slate-500">Semaines 13 à 18 · Kali Linux, Web Security & CTF</p>
+                                <div class="flex flex-wrap gap-1 mt-1">
+                                    <span class="pill-module red">🛠️ OWASP</span>
+                                    <span class="pill-module red">🗄️ SQLmap</span>
+                                    <span class="pill-module red">📡 Nmap</span>
+                                    <span class="pill-module red">💥 Metasploit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="icon-3" class="text-2xl font-bold text-orange-500 ml-4">+</span>
+                    </button>
+                    <div id="bloc-3" class="accordion-content border-t border-slate-100 bg-slate-50/50 p-6">
+
+                        <div class="phase-header" style="background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%);">
+                            <h3>📘 PHASE 03 · Semaines 13 à 18</h3>
+                            <p>La phase pratique des outils de test d'intrusion, toujours en environnement légal et contrôlé. Méthodologie : reconnaissance, exploitation, post-exploitation.</p>
+                        </div>
+
+                        <div class="bloc-description">
+                            <strong>🎯 Objectifs pédagogiques</strong>
+                            <ul class="objectives-list mt-2">
+                                <li>Utiliser Kali Linux.</li>
+                                <li>Mener une reconnaissance avec Nmap.</li>
+                                <li>Exploiter une injection SQL avec SQLmap.</li>
+                                <li>Utiliser Metasploit.</li>
+                            </ul>
+                        </div>
+
+                        <!-- S13 -->
+                        <div class="week-card">
+                            <div class="week-header bg-red-soft">
+                                <h4 class="text-red-dark">S13 : Prise en main de Kali Linux</h4>
+                                <span class="badge-level level-avance">AVANCÉ</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Installation de Kali Linux. Panorama des outils. Charte éthique.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Installer Kali Linux en VM.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Explorer les outils.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Signer la charte éthique.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Comprendre le cadre légal.</div>
+                                    <div class="step-item"><span class="step-number red">5</span> Livrable : Charte signée + Kali opérationnel.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S14 -->
+                        <div class="week-card">
+                            <div class="week-header bg-red-soft">
+                                <h4 class="text-red-dark">S14 : Reconnaissance avec Nmap</h4>
+                                <span class="badge-level level-avance">AVANCÉ</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Scan de ports, détection de services et OS. Scripts NSE.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Syntaxe de Nmap.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Scans de ports.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Détection de versions.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Identifier l'OS.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Utiliser les scripts NSE.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Rapport de reconnaissance.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S15 -->
+                        <div class="week-card">
+                            <div class="week-header bg-red-soft">
+                                <h4 class="text-red-dark">S15 : Sécurité des applications web (OWASP)</h4>
+                                <span class="badge-level level-avance">AVANCÉ</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> OWASP ZAP pour analyse automatisée. Proxy d'interception.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Installer OWASP ZAP.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Analyse automatisée.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Approfondir OWASP Top 10.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Utiliser Burp Suite.</div>
+                                    <div class="step-item"><span class="step-number red">5</span> Livrable : Rapport d'analyse ZAP.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S16 -->
+                        <div class="week-card">
+                            <div class="week-header bg-red-soft">
+                                <h4 class="text-red-dark">S16 : Injections SQL avec SQLmap</h4>
+                                <span class="badge-level level-avance">AVANCÉ</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Principe des injections SQL. Utilisation de SQLmap. Prévention.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Comprendre les injections SQL.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Installer SQLmap.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Utiliser SQLmap.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Analyser les résultats.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Proposer des mesures de prévention.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Compte-rendu d'exploitation.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S17 -->
+                        <div class="week-card">
+                            <div class="week-header bg-red-soft">
+                                <h4 class="text-red-dark">S17 : Exploitation avec Metasploit</h4>
+                                <span class="badge-level level-avance">AVANCÉ</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Architecture de Metasploit. Recherche et sélection d'exploits. Post-exploitation.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> Architecture de Metasploit.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Rechercher un exploit.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Lancer un exploit.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Utiliser un payload.</div>
+                                    <div class="step-item"><span class="step-number">5</span> Post-exploitation.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Scénario d'exploitation documenté.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S18 -->
+                        <div class="week-card">
+                            <div class="week-header bg-red-soft">
+                                <h4 class="text-red-dark">S18 : Projet de phase 3 — mini CTF</h4>
+                                <span class="badge-level level-avance">AVANCÉ</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Épreuve CTF en équipe. Rédaction d'un write-up.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number">1</span> S'inscrire sur TryHackMe.</div>
+                                    <div class="step-item"><span class="step-number orange">2</span> Résoudre 2 machines.</div>
+                                    <div class="step-item"><span class="step-number">3</span> Documenter les étapes.</div>
+                                    <div class="step-item"><span class="step-number orange">4</span> Débriefing collectif.</div>
+                                    <div class="step-item"><span class="step-number red">5</span> Livrable : Write-up de CTF.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================ -->
+                <!-- PHASE 4 : DÉFENSE & PROFESSIONNALISATION (S19 à S24)           -->
+                <!-- ============================================================ -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button onclick="toggleBloc(4)" class="bloc-toggle hover:bg-orange-50 transition-colors flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg flex-shrink-0">04</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-800 uppercase">Défense & Professionnalisation</h3>
+                                <p class="text-sm text-slate-500">Semaines 19 à 24 · Blue Team, SIEM, Projet Final</p>
+                                <div class="flex flex-wrap gap-1 mt-1">
+                                    <span class="pill-module green">🛡️ SIEM</span>
+                                    <span class="pill-module green">🔍 Snort</span>
+                                    <span class="pill-module green">🔬 Forensics</span>
+                                    <span class="pill-module green">📊 Audit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="icon-4" class="text-2xl font-bold text-orange-500 ml-4">+</span>
+                    </button>
+                    <div id="bloc-4" class="accordion-content border-t border-slate-100 bg-slate-50/50 p-6">
+
+                        <div class="phase-header" style="background: linear-gradient(135deg, #064e3b 0%, #059669 100%);">
+                            <h3>📘 PHASE 04 · Semaines 19 à 24</h3>
+                            <p>La phase défense : détection, analyse et réponse aux incidents. Projet final mobilisant toutes les compétences.</p>
+                        </div>
+
+                        <div class="bloc-description">
+                            <strong>🎯 Objectifs pédagogiques</strong>
+                            <ul class="objectives-list mt-2">
+                                <li>Comprendre le rôle d'un SIEM.</li>
+                                <li>Analyser du trafic avec Snort.</li>
+                                <li>Mener une investigation forensique.</li>
+                                <li>Réaliser un audit et rédiger un rapport.</li>
+                            </ul>
+                        </div>
+
+                        <!-- S19 -->
+                        <div class="week-card">
+                            <div class="week-header" style="background:#1e293b; border-color:#334155;">
+                                <h4 style="color:#f8fafc;">S19 : Le SOC et le SIEM</h4>
+                                <span class="badge-level level-expert">EXPERT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Rôle d'un SOC. Installation de Wazuh / ELK Stack. Tableaux de bord et alertes.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number green">1</span> Découvrir le SOC.</div>
+                                    <div class="step-item"><span class="step-number green">2</span> Installer un SIEM.</div>
+                                    <div class="step-item"><span class="step-number green">3</span> Configurer les collecteurs.</div>
+                                    <div class="step-item"><span class="step-number green">4</span> Créer des dashboards.</div>
+                                    <div class="step-item"><span class="step-number green">5</span> Mettre en place des alertes.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Tableau de bord SIEM.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S20 -->
+                        <div class="week-card">
+                            <div class="week-header" style="background:#1e293b; border-color:#334155;">
+                                <h4 style="color:#f8fafc;">S20 : Détection d'intrusion avec Snort</h4>
+                                <span class="badge-level level-expert">EXPERT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> IDS/IPS. Écriture de règles Snort. Analyse des alertes.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number green">1</span> Installer Snort.</div>
+                                    <div class="step-item"><span class="step-number green">2</span> Configurer en mode IDS.</div>
+                                    <div class="step-item"><span class="step-number green">3</span> Écrire des règles.</div>
+                                    <div class="step-item"><span class="step-number green">4</span> Tester avec Nmap.</div>
+                                    <div class="step-item"><span class="step-number green">5</span> Analyser les alertes.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Journal d'alertes commenté.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S21 -->
+                        <div class="week-card">
+                            <div class="week-header" style="background:#1e293b; border-color:#334155;">
+                                <h4 style="color:#f8fafc;">S21 : Introduction au forensics numérique</h4>
+                                <span class="badge-level level-expert">EXPERT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Chaîne de custody. Analyse d'image disque. Reconstitution d'incident.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number green">1</span> Comprendre la chaîne de custody.</div>
+                                    <div class="step-item"><span class="step-number green">2</span> Acquérir une image disque.</div>
+                                    <div class="step-item"><span class="step-number green">3</span> Analyser avec Autopsy.</div>
+                                    <div class="step-item"><span class="step-number green">4</span> Récupérer des fichiers.</div>
+                                    <div class="step-item"><span class="step-number green">5</span> Établir une chronologie.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Rapport d'investigation.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S22 -->
+                        <div class="week-card">
+                            <div class="week-header" style="background:#1e293b; border-color:#334155;">
+                                <h4 style="color:#f8fafc;">S22 : Audit de sécurité</h4>
+                                <span class="badge-level level-expert">EXPERT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Méthodologie d'audit. Rédaction de rapport professionnel.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number green">1</span> Méthodologie d'audit.</div>
+                                    <div class="step-item"><span class="step-number green">2</span> Définir le périmètre.</div>
+                                    <div class="step-item"><span class="step-number green">3</span> Réaliser les tests.</div>
+                                    <div class="step-item"><span class="step-number green">4</span> Analyser les vulnérabilités.</div>
+                                    <div class="step-item"><span class="step-number green">5</span> Rédiger le rapport.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Rapport d'audit.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S23 -->
+                        <div class="week-card">
+                            <div class="week-header" style="background:#1e293b; border-color:#334155;">
+                                <h4 style="color:#f8fafc;">S23 : Préparation du projet final</h4>
+                                <span class="badge-level level-expert">EXPERT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Scénario attaque + défense. Réalisation encadrée.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number green">1</span> Choisir un scénario.</div>
+                                    <div class="step-item"><span class="step-number green">2</span> Mettre en place l'environnement.</div>
+                                    <div class="step-item"><span class="step-number green">3</span> Réaliser l'audit.</div>
+                                    <div class="step-item"><span class="step-number green">4</span> Documenter les étapes.</div>
+                                    <div class="step-item"><span class="step-number green">5</span> Préparer la soutenance.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Projet final finalisé.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- S24 -->
+                        <div class="week-card">
+                            <div class="week-header" style="background:#1e293b; border-color:#334155;">
+                                <h4 style="color:#f8fafc;">S24 : Soutenance & clôture</h4>
+                                <span class="badge-level level-expert">EXPERT</span>
+                            </div>
+                            <div class="week-body">
+                                <div class="definition"><strong>Définition :</strong> Présentation devant un jury. Remise des attestations.</div>
+                                <p class="text-sm font-semibold text-slate-700 mb-3">📋 Étapes :</p>
+                                <div class="space-y-1">
+                                    <div class="step-item"><span class="step-number green">1</span> Présenter le projet.</div>
+                                    <div class="step-item"><span class="step-number green">2</span> Répondre aux questions.</div>
+                                    <div class="step-item"><span class="step-number green">3</span> Recevoir les retours.</div>
+                                    <div class="step-item"><span class="step-number green">4</span> Valider les compétences.</div>
+                                    <div class="step-item"><span class="step-number green">5</span> Recevoir l'attestation.</div>
+                                    <div class="step-item"><span class="step-number red">6</span> Livrable : Attestation HACKINÉTIQUE.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : ÉVALUATION ==================== -->
+        <section id="evaluation" class="mb-12">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Évaluation et validation des acquis</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                        <h4 class="font-bold text-blue-800 mb-3">📊 Grille d'évaluation</h4>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li>• <strong>Assiduité</strong> (20 %).</li>
+                            <li>• <strong>Livrables hebdomadaires</strong> (30 %).</li>
+                            <li>• <strong>Projets de phase</strong> (30 %).</li>
+                            <li>• <strong>Auto-évaluation</strong> (20 %).</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 rounded-xl p-6 border border-green-100">
+                        <h4 class="font-bold text-green-800 mb-3">🎓 Certification</h4>
+                        <p class="text-sm text-slate-700">
+                            À l'issue des 24 semaines, l'apprenant reçoit une <strong>attestation HACKINÉTIQUE</strong> délivrée par CJEPE-Bénin. Ce parcours prépare aux certifications <strong>CompTIA Security+</strong>, <strong>eJPT</strong> et TryHackMe Academy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : CADRE ÉTHIQUE ==================== -->
+        <section id="ethique" class="mb-12">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Cadre éthique et légal</h2>
+                <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-xl">
+                    <p class="text-lg text-slate-700 leading-relaxed">
+                        Les techniques offensives sont <strong>strictement réservées aux environnements de laboratoire autorisés</strong>. La signature d'une <strong>charte d'engagement éthique</strong> en semaine 13 formalise cet engagement.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : MÉTHODOLOGIE ==================== -->
+        <section id="methodology" class="mb-12">
+            <div class="bg-blue-900 rounded-3xl p-8 md:p-12 text-white shadow-xl">
+                <h2 class="text-3xl font-bold mb-8 text-center uppercase tracking-wider">L'Approche Pédagogique du Formateur</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-4 bg-blue-800/30 rounded-2xl backdrop-blur-sm">
+                        <div class="text-4xl mb-4">🧪</div>
+                        <h4 class="font-bold text-xl mb-2">Environnement Isolé</h4>
+                        <p class="text-blue-100 text-sm">100% des tests en Machines Virtuelles (Ubuntu, Kali, Debian).</p>
+                    </div>
+                    <div class="text-center p-4 bg-orange-500/20 rounded-2xl backdrop-blur-sm border border-orange-400/30">
+                        <div class="text-4xl mb-4">🏗️</div>
+                        <h4 class="font-bold text-xl mb-2">Build & Break</h4>
+                        <p class="text-blue-100 text-sm">Construire (Défense) puis tester (Attaque) dans les VMs.</p>
+                    </div>
+                    <div class="text-center p-4 bg-blue-800/30 rounded-2xl backdrop-blur-sm">
+                        <div class="text-4xl mb-4">🏆</div>
+                        <h4 class="font-bold text-xl mb-2">Accompagnement Certif'</h4>
+                        <p class="text-blue-100 text-sm">Préparation Security+, eJPT ou PNPT.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION : INSCRIPTION ==================== -->
+        <section id="inscription" class="mb-12 bg-white rounded-3xl shadow-lg border border-slate-200 p-8 md:p-12">
+            <div class="md:flex items-center justify-between">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900">Prêt à devenir <span class="text-orange-500">Expert en Hacking Éthique</span> ?</h2>
+                    <p class="text-slate-600 mt-2">Rejoignez la prochaine promotion à l'Institut <strong>CJEPE-BENIN</strong></p>
+                    <div class="flex flex-wrap gap-6 mt-4">
+                        <div><span class="font-bold text-blue-900">📅 Durée :</span> 6 mois</div>
+                        <div><span class="font-bold text-blue-900">💰 Inscription :</span> 20.000 CFA</div>
+                        <div><span class="font-bold text-blue-900">💳 Formation :</span> 350.000 CFA</div>
+                    </div>
+                    <div class="mt-4 text-sm text-slate-500">
+                        📞 Cotonou : <span class="font-mono font-bold">+229 0140 3210 84</span> &nbsp;|&nbsp; <span class="font-mono font-bold">+229 0153 201003</span>
+                    </div>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="#" class="btn-orange text-lg px-8 py-3 shadow-lg">S'inscrire maintenant</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-slate-900 text-slate-400 py-12 px-4 text-center">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-center gap-6 text-sm mb-4">
+                <span class="text-white font-bold">🛡️ Hackinétique</span>
+                <span class="text-orange-400">|</span>
+                <span>CJEPE-BENIN</span>
+                <span class="text-orange-400">|</span>
+                <span>Formation Professionnelle</span>
+            </div>
+            <p class="text-xs">
+                Syllabus conçu pour instructeur · Stack technique : VS Code + VMs Linux (Ubuntu/Kali/Debian)<br />
+                Toujours agir dans un cadre légal et éthique.
+            </p>
+            <p class="text-xs text-slate-500 mt-2">© 2026 Hackinétique · Cotonou, Bénin</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== CHART.JS =====
+        const ctx = document.getElementById('balanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: ['Sécurité Web', 'Réseaux & Systèmes', 'Outils Cyber', 'Python', 'Hacking', 'Défense'],
+                datasets: [{
+                    label: 'Intensité par domaine',
+                    data: [85, 75, 80, 65, 90, 70],
+                    backgroundColor: [
+                        'rgba(245, 158, 11, 0.6)',
+                        'rgba(30, 58, 138, 0.6)',
+                        'rgba(220, 38, 38, 0.6)',
+                        'rgba(37, 99, 235, 0.6)',
+                        'rgba(185, 28, 28, 0.6)',
+                        'rgba(15, 23, 42, 0.6)'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { r: { ticks: { display: false } } },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 12, font: { size: 10, weight: 'bold' } }
+                    }
+                }
+            }
+        });
+
+        // ===== ACCORDÉON =====
+        function toggleBloc(id) {
+            const bloc = document.getElementById('bloc-' + id);
+            const icon = document.getElementById('icon-' + id);
+            if (bloc.classList.contains('hidden')) {
+                bloc.classList.remove('hidden');
+                icon.innerText = '−';
+            } else {
+                bloc.classList.add('hidden');
+                icon.innerText = '+';
+            }
+        }
+
+        // Premier bloc ouvert par défaut
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstBloc = document.getElementById('bloc-1');
+            const firstIcon = document.getElementById('icon-1');
+            if (firstBloc) {
+                firstBloc.classList.remove('hidden');
+                if (firstIcon) firstIcon.innerText = '−';
+            }
+        });
+    </script>
+
+</body>
+</html>

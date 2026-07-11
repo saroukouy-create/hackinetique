@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Programme complet · HACKINÉTIQUE · CJEPE-BENIN</title>
+<meta name="description" content="Plateforme de cours HACKINÉTIQUE : 24 semaines, leçons, TP et quiz pour devenir expert en hacking éthique." />
+<link rel="icon" href="assets/img/logo.png" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container row">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="Logo Institut CJEPE-BENIN" />
+      <span class="name">Hackinétique</span>
+    </a>
+    <button class="burger" id="navBurger">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Accueil</a>
+      <a href="index.html#programme">Plan du programme</a>
+      <a href="cours.html" class="active">Espace de cours</a>
+      <a href="index.html#inscription">S'inscrire</a>
+    </div>
+  </div>
+</nav>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-progress">
+      <div class="top"><span>Progression globale</span><span id="progressLabel">0/24 · 0%</span></div>
+      <div class="progress-bar"><span id="progressBar" style="width:0%"></span></div>
+    </div>
+    <input type="search" id="searchInput" class="search-box" placeholder="Rechercher une semaine (ex : Nmap, SIEM, CSS)…" />
+    <div id="sidebarList"></div>
+  </aside>
+
+  <main class="main-panel" id="mainPanel">
+    <div class="empty-state"><h2>Chargement du programme…</h2></div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/js/data.phase1.js"></script>
+<script src="assets/js/data.phase2.js"></script>
+<script src="assets/js/data.phase3.js"></script>
+<script src="assets/js/data.phase4.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Plateforme de formation cybersécurité de zéro à expert, structurée avec modules, TPs et quiz." />
+    <title>Hackinétique | Formation cybersécurité zéro à expert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__overlay"></div>
+      <div class="container hero__content">
+        <div class="hero__brand">
+          <img src="Hackinétique.png" alt="Logo Hackinétique" />
+          <div>
+            <p class="eyebrow">Institut de formation CJEPE-BENIN</p>
+            <h1>Hackinétique</h1>
+            <p class="hero__subtitle">
+              Une formation cybersécurité rigoureuse, progressive et internationale,
+              conçue pour passer de zéro à expert avec méthode, pratique et professionnalisme.
+            </p>
+          </div>
+        </div>
+        <div class="hero__actions">
+          <a href="#modules" class="btn btn--primary">Commencer le parcours</a>
+          <a href="#charte" class="btn btn--secondary">Découvrir la charte</a>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav">
+      <div class="container nav__wrap">
+        <a href="#accueil">Accueil</a>
+        <a href="#program">Programme</a>
+        <a href="#modules">Modules</a>
+        <a href="#charte">Charte</a>
+        <a href="#plan">Plan</a>
+      </div>
+    </nav>
+
+    <main id="accueil">
+      <section class="section">
+        <div class="container grid grid--2">
+          <div class="card">
+            <p class="eyebrow">Objectif pédagogique</p>
+            <h2>Former un étudiant prêt à performer dans un environnement réel</h2>
+            <p>
+              Ce parcours met l’accent sur la compréhension profonde des systèmes,
+              la pratique sécurisée, l’analyse critique et l’éthique. Chaque module
+              combine théorie, exercice pratique, travail personnel et évaluation.
+            </p>
+            <ul class="check-list">
+              <li>Approche structurée de zéro à expert</li>
+              <li>Exercices pratiques et TPs guidés</li>
+              <li>Quiz de validation à la fin de chaque module</li>
+              <li>Cadre international de qualité et d’éthique</li>
+            </ul>
+          </div>
+          <div class="card card--accent">
+            <p class="eyebrow">Parcours en 6 modules</p>
+            <div class="stats">
+              <div>
+                <strong>6</strong>
+                <span>Modules</span>
+              </div>
+              <div>
+                <strong>18</strong>
+                <span>TP</span>
+              </div>
+              <div>
+                <strong>30</strong>
+                <span>Quiz</span>
+              </div>
+            </div>
+            <div class="progress">
+              <div class="progress__bar" id="overall-progress"></div>
+            </div>
+            <p class="muted">Progression du parcours : <span id="overall-label">1/6 modules</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="program" class="section section--light">
+        <div class="container">
+          <div class="section__heading">
+            <p class="eyebrow">Programme</p>
+            <h2>Un cursus cohérent, progressif et orienté performance</h2>
+          </div>
+          <div class="cards-grid">
+            <article class="mini-card">
+              <h3>Fondations</h3>
+              <p>Protocoles, systèmes, réseau et logique de la sécurité.</p>
+            </article>
+            <article class="mini-card">
+              <h3>Réseaux & Linux</h3>
+              <p>Analyse réseau, services, lignes de commande et administration.</p>
+            </article>
+            <article class="mini-card">
+              <h3>Web & Applications</h3>
+              <p>Vulnérabilités web, tests d’intrusion et défense.</p>
+            </article>
+            <article class="mini-card">
+              <h3>Éthique & Pentest</h3>
+              <p>Méthodologie, planification, reporting et conformité.</p>
+            </article>
+            <article class="mini-card">
+              <h3>Analyse SOC</h3>
+              <p>Détection, logs, SIEM, réponse aux incidents et continuité.</p>
+            </article>
+            <article class="mini-card">
+              <h3>Capstone</h3>
+              <p>Projet de fin de parcours en conditions réalistes.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="modules" class="section">
+        <div class="container">
+          <div class="section__heading">
+            <p class="eyebrow">Modules interactifs</p>
+            <h2>Choisissez un module pour consulter le contenu, le TP et le quiz</h2>
+          </div>
+          <div class="module-layout">
+            <aside class="module-nav" id="module-nav"></aside>
+            <div class="module-detail" id="module-detail"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="charte" class="section section--light">
+        <div class="container">
+          <div class="section__heading">
+            <p class="eyebrow">Charte pédagogique</p>
+            <h2>Des normes de qualité, d’éthique et de rigueur internationales</h2>
+          </div>
+          <div class="grid grid--2">
+            <div class="card">
+              <h3>Principes de la formation</h3>
+              <ul class="check-list">
+                <li>Respect des bonnes pratiques de sécurité et de confidentialité</li>
+                <li>Apprentissage progressif, sans raccourcis ni pratiques dangereuses</li>
+                <li>Évaluation continue et mise en situation professionnelle</li>
+                <li>Responsabilité, intégrité et usage éthique des compétences</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Compétences visées</h3>
+              <ul class="check-list">
+                <li>Comprendre les fondements techniques et conceptuels</li>
+                <li>Analyser et documenter une situation de sécurité</li>
+                <li>Proposer des solutions concrètes et pertinentes</li>
+                <li>Être capable d’évoluer vers des fonctions spécialisées</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="plan" class="section">
+        <div class="container">
+          <div class="section__heading">
+            <p class="eyebrow">Plan de formation</p>
+            <h2>Un chemin clair pour transformer un étudiant en profil de haut niveau</h2>
+          </div>
+          <div class="timeline">
+            <article class="timeline__item">
+              <h3>Phase 1</h3>
+              <p>Fondamentaux, logique, architecture réseau et sécurité de base.</p>
+            </article>
+            <article class="timeline__item">
+              <h3>Phase 2</h3>
+              <p>Pratique système, Linux, protocoles, outils, automatisation et gouvernance.</p>
+            </article>
+            <article class="timeline__item">
+              <h3>Phase 3</h3>
+              <p>Analyse des applications web, vulnérabilités, contre-mesures et tests.</p>
+            </article>
+            <article class="timeline__item">
+              <h3>Phase 4</h3>
+              <p>Simulation d’incidents, SOC, réponse, documentation et communication.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__wrap">
+        <p>© <span id="year"></span> Hackinétique • Formation cybersécurité · CJEPE-BENIN</p>
+        <p>De la pratique à l’expertise, avec rigorisme et éthique.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
