@@ -49,7 +49,7 @@
       </div>
       <div class="hero-stats">
         <div class="stat-card"><span class="num">24</span><span class="lbl">Semaines</span></div>
-        <div class="stat-card"><span class="num">4</span><span class="lbl">Phases</span></div>
+        <div class="stat-card"><span class="num">4</span><span class="lbl">UV</span></div>
         <div class="stat-card"><span class="num">70%</span><span class="lbl">Pratique lab</span></div>
         <div class="stat-card"><span class="num">120+</span><span class="lbl">Questions de quiz</span></div>
       </div>
@@ -168,32 +168,32 @@
 <!-- ===================== PROGRAMME / PLAN ===================== -->
 <section class="section" id="programme">
   <div class="container">
-    <h2 class="section-title">Le plan du programme — 4 phases, 24 semaines</h2>
-    <p class="section-sub">Chaque phase s'appuie sur les compétences acquises dans la précédente. Cliquez sur une phase pour entrer directement dans l'espace de cours interactif (leçon, TP, quiz).</p>
+    <h2 class="section-title">Le plan du programme — 4 UV, 24 semaines</h2>
+    <p class="section-sub">Chaque UV s'appuie sur les compétences acquises dans la précédente et se termine par un TP et un Quiz de synthèse. Cliquez sur une UV pour entrer directement dans l'espace de cours interactif (leçon, TP, quiz).</p>
 
     <div class="phase-cards">
       <a class="phase-card phase-1" href="#cours" onclick="startWeek('S1')">
-        <div class="num">01</div>
+        <div class="num">UV1</div>
         <h3>Fondamentaux &amp; Sécurité Web</h3>
         <p>VS Code, Linux, HTML/CSS, OWASP Top 10.</p>
         <span class="weeks">Semaines 1 à 6</span>
       </a>
       <a class="phase-card phase-2" href="#cours" onclick="startWeek('S7')">
-        <div class="num">02</div>
+        <div class="num">UV2</div>
         <h3>Réseaux &amp; Systèmes</h3>
         <p>OSI/TCP-IP, Wireshark, Python, pare-feu.</p>
         <span class="weeks">Semaines 7 à 12</span>
       </a>
       <a class="phase-card phase-3" href="#cours" onclick="startWeek('S13')">
-        <div class="num">03</div>
+        <div class="num">UV3</div>
         <h3>Outils de Cybersécurité</h3>
         <p>Kali, Nmap, ZAP/Burp, SQLmap, Metasploit, CTF.</p>
         <span class="weeks">Semaines 13 à 18</span>
       </a>
       <a class="phase-card phase-4" href="#cours" onclick="startWeek('S19')">
-        <div class="num">04</div>
+        <div class="num">UV4</div>
         <h3>Défense &amp; Professionnalisation</h3>
-        <p>SOC, SIEM, Snort, forensics, audit, projet final.</p>
+        <p>SOC, SIEM, Snort, forensics, examen final, certificat.</p>
         <span class="weeks">Semaines 19 à 24</span>
       </a>
     </div>
@@ -214,7 +214,7 @@
   <div class="app-shell">
     <aside class="sidebar">
       <div class="sidebar-progress">
-        <div class="top"><span>Progression globale</span><span id="progressLabel">0/24 · 0%</span></div>
+        <div class="top"><span>Progression globale</span><span id="progressLabel">0/28 · 0%</span></div>
         <div class="progress-bar"><span id="progressBar" style="width:0%"></span></div>
       </div>
       <input type="search" id="searchInput" class="search-box" placeholder="Rechercher une semaine (ex : Nmap, SIEM, CSS)…" />
@@ -237,14 +237,15 @@
         <ul style="font-size:0.92rem; color:var(--slate-700); display:flex; flex-direction:column; gap:0.4rem;">
           <li>• <strong>Assiduité</strong> — 20 %</li>
           <li>• <strong>Livrables hebdomadaires + quiz</strong> — 30 %</li>
-          <li>• <strong>Projets de phase (TP de synthèse)</strong> — 30 %</li>
-          <li>• <strong>Auto-évaluation & soutenance finale</strong> — 20 %</li>
+          <li>• <strong>Projets et TP de synthèse d'UV</strong> — 30 %</li>
+          <li>• <strong>Auto-évaluation & examen final</strong> — 20 %</li>
         </ul>
       </div>
       <div class="card">
         <h4 style="color:var(--green); margin-bottom:0.6rem;">🎓 Certification délivrée</h4>
         <p style="font-size:0.92rem; color:var(--slate-700);">
-          À l'issue des 24 semaines, l'apprenant reçoit une <strong>attestation HACKINÉTIQUE</strong> délivrée par l'Institut CJEPE-Bénin.
+          Chaque UV se conclut par un <strong>TP et un Quiz de synthèse</strong>. À l'issue des 24 semaines et après réussite de l'<strong>examen final</strong>,
+          l'apprenant reçoit un <strong>certificat professionnel HACKINÉTIQUE</strong> délivré par l'Institut CJEPE-Bénin.
           Ce parcours prépare également aux certifications internationales <strong>CompTIA Security+</strong>, <strong>eJPT</strong> et TryHackMe Academy.
         </p>
       </div>

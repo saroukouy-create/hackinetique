@@ -197,7 +197,7 @@ const PHASE1 = [
   title: "Structurer une page web (HTML)",
   level: "debutant",
   duration: "Semaine 4 · ~6h",
-  intro: "Comprendre le Web commence par son squelette : le HTML. Cette semaine construit les bases indispensables pour, plus tard, repérer les failles côté client (XSS, injection HTML) que l'on découvrira en phase 3.",
+  intro: "Comprendre le Web commence par son squelette : le HTML. Cette semaine construit les bases indispensables pour, plus tard, repérer les failles côté client (XSS, injection HTML) que l'on découvrira en UV3.",
   objectives: [
     "Structurer un document HTML valide avec des balises sémantiques.",
     "Créer un formulaire HTML fonctionnel.",
@@ -317,7 +317,7 @@ const PHASE1 = [
 },
 {
   id: "S6", week: 6, phase: 1,
-  title: "Projet de phase 1",
+  title: "Projet de l'UV1",
   level: "debutant",
   duration: "Semaine 6 · ~8h (projet)",
   intro: "Semaine de synthèse : appliquer en laboratoire légal (OWASP WebGoat) les notions de fragilité web découvertes en semaine 5, puis documenter la démarche comme un professionnel — car un test d'intrusion sans rapport n'a aucune valeur.",
@@ -336,7 +336,7 @@ const PHASE1 = [
   analogy: { title: "🏥 L'audit comme un diagnostic médical", text: "Un audit de sécurité ressemble à une consultation médicale : on observe les symptômes (comportement anormal), on pose un diagnostic (vulnérabilité identifiée), puis on prescrit un traitement (recommandation de correction) — jamais l'inverse." },
   lesson: [
     { heading: "Déployer WebGoat en environnement contrôlé", html: "<p>WebGoat s'exécute généralement via Docker : <code>docker run -p 8080:8080 webgoat/webgoat</code>. Cet environnement est <strong>volontairement vulnérable</strong> et ne doit jamais être exposé sur internet.</p>" },
-    { heading: "Réaliser une injection HTML simple", html: "<p>Un champ de saisie non filtré peut accepter du code HTML au lieu d'un texte brut. Si ce contenu est ensuite affiché sans être « échappé », le navigateur l'interprète — c'est le principe fondateur de la faille XSS que l'on approfondira en phase 3.</p>" },
+    { heading: "Réaliser une injection HTML simple", html: "<p>Un champ de saisie non filtré peut accepter du code HTML au lieu d'un texte brut. Si ce contenu est ensuite affiché sans être « échappé », le navigateur l'interprète — c'est le principe fondateur de la faille XSS que l'on approfondira en UV3.</p>" },
     { heading: "Lire du code vulnérable", html: "<p>Analyser le code source d'un module WebGoat permet de comprendre <em>pourquoi</em> une entrée utilisateur devient dangereuse : absence de validation, absence d'échappement, confiance excessive envers le client.</p>" },
     { heading: "Structurer un rapport d'audit", html: "<p>Un rapport professionnel suit toujours la même trame : résumé exécutif, méthodologie, liste des vulnérabilités (avec sévérité), preuve de concept, recommandations. C'est le format attendu dans les certifications eJPT et OSCP.</p>" }
   ],
@@ -349,9 +349,9 @@ const PHASE1 = [
     { text: "Proposer des corrections.", color: "blue" },
     { text: "Livrable : mini-rapport d'audit.", color: "red" }
   ],
-  deliverable: "Un mini-rapport d'audit (2-3 pages) documentant une injection HTML réalisée sur WebGoat, avec preuve de concept et recommandations de correction — clôture de la Phase 1.",
+  deliverable: "Un mini-rapport d'audit (2-3 pages) documentant une injection HTML réalisée sur WebGoat, avec preuve de concept et recommandations de correction — clôture de l'UV1.",
   tp: {
-    title: "TP S6 — Projet de phase : premier audit documenté",
+    title: "TP S6 — Projet de l'UV1 : premier audit documenté",
     objectif: "Mener une mini-évaluation de sécurité de bout en bout sur un environnement légal et produire un livrable professionnel.",
     duree: "3 à 4 heures (projet de synthèse)",
     materiel: ["Docker installé", "OWASP WebGoat", "VS Code (extension Markdown All in One)"],
@@ -373,6 +373,50 @@ const PHASE1 = [
     { q: "Sur quel type d'environnement doit-on s'exercer aux techniques offensives durant ce programme ?", options: ["N'importe quel site public", "Uniquement des environnements de laboratoire autorisés (WebGoat, VM personnelles)", "Le site d'un concurrent", "Un réseau Wi-Fi public"], correct: 1, explanation: "Le cadre éthique et légal du programme HACKINÉTIQUE impose de n'agir que sur des cibles autorisées, jamais sur des systèmes tiers sans consentement." },
     { q: "Quel standard international structure la méthodologie d'un test d'intrusion et de son rapport ?", options: ["ISO 9001", "PTES — Penetration Testing Execution Standard", "HTML5", "RGPD"], correct: 1, explanation: "Le PTES définit les étapes standard d'un test d'intrusion : pré-engagement, reconnaissance, exploitation, post-exploitation, rapport." }
   ]
+},
+{
+  id: "UV1-SYNTH", week: 6, phase: 1,
+  title: "Synthèse d'UV1 — TP et Quiz de validation",
+  level: "debutant",
+  duration: "Fin d'UV1 · ~3h",
+  intro: "Ce module de synthèse clôt officiellement l'UV1. Contrairement au projet de la semaine 6 (un audit ciblé sur WebGoat), ce TP et ce quiz couvrent l'ensemble des six semaines de l'UV1 — poste de travail, terminal Linux, HTML et CSS — pour vérifier que les fondations sont réellement acquises avant d'entrer dans l'UV2 (Réseaux & Systèmes).",
+  objectives: [
+    "Vérifier la maîtrise combinée de l'environnement VS Code/WSL2 et du terminal Linux.",
+    "Relier les commandes de navigation, gestion de fichiers et permissions à un cas concret.",
+    "Construire une page web structurée en HTML et mise en forme en CSS depuis zéro.",
+    "Restituer les principes d'un premier audit web légal (WebGoat) et d'un rapport structuré.",
+    "Valider par un quiz transversal les acquis des six semaines de l'UV1."
+  ],
+  definition: "Bilan de fin d'UV1 : un TP intégrateur qui mobilise dans un seul livrable les compétences de S1 à S6, suivi d'un quiz de validation transversal (norme de réussite 70%) conditionnant le passage à l'UV2.",
+  lesson: [
+    { heading: "Pourquoi un module de synthèse distinct des TP hebdomadaires ?", html: "<p>Chaque semaine de l'UV1 valide une compétence isolée (installer son poste, naviguer en ligne de commande, structurer une page, la mettre en forme, mener un premier audit). Ce module de fin d'UV vérifie que ces compétences <strong>s'articulent entre elles</strong> : un professionnel de la cybersécurité doit pouvoir passer de son terminal à son éditeur de code puis à un rapport d'audit sans rupture — c'est exactement ce que ce TP de synthèse met à l'épreuve.</p>" },
+    { heading: "Ce que couvre le quiz de validation", html: "<p>Le quiz de synthèse pioche des questions représentatives des six semaines : environnement VS Code/WSL2 (S1), commandes et permissions Linux (S2-S3), structure HTML (S4), mise en forme CSS et premières notions d'attaques web (S5), méthodologie d'audit sur WebGoat (S6). Un score inférieur à 70% signale qu'il faut revoir une ou plusieurs semaines avant de démarrer l'UV2.</p>" }
+  ],
+  standards: ["CompTIA Security+ — Domaine 4 : outils, techniques et opérations de sécurité", "OWASP Testing Guide — bases de l'audit web"],
+  tp: {
+    title: "TP de synthèse UV1 — Page d'audit documentée, du terminal au rapport",
+    objectif: "Produire, en une seule chaîne d'actions, un mini-site HTML/CSS servant de support à un rapport d'audit WebGoat, en n'utilisant que le terminal et VS Code.",
+    duree: "2 à 3 heures",
+    materiel: ["Environnement VS Code + WSL2 (ou terminal natif) opérationnel", "OWASP WebGoat déployé (Docker)", "Notes et livrables des TP S1 à S6"],
+    consignes: [
+      "Depuis le terminal, créer une arborescence `uv1-synthese/{site,rapport}` avec `mkdir -p`.",
+      "Dans `site/`, créer un fichier `index.html` structuré (titre, sections, liste) et une feuille `style.css` associée, prévisualisés avec Live Server.",
+      "Modifier les permissions du dossier `rapport/` pour le restreindre en lecture seule une fois complété (`chmod`).",
+      "Rejouer rapidement l'injection HTML de WebGoat (S6) et consigner résultat et capture dans `rapport/audit.md`.",
+      "Rédiger dans `rapport/audit.md` un mini-rapport (résumé exécutif, preuve, recommandation) au format Markdown.",
+      "Utiliser `grep` pour retrouver automatiquement toutes les occurrences du mot « TODO » ou « recommandation » dans le dossier `uv1-synthese/`.",
+      "Faire une capture d'écran finale montrant la page HTML/CSS affichée et le rapport Markdown ouvert côte à côte dans VS Code."
+    ],
+    livrable: "Dossier `uv1-synthese/` complet (site HTML/CSS + rapport Markdown) et capture d'écran finale.",
+    criteres: ["Arborescence créée entièrement en ligne de commande", "Page HTML valide, mise en forme avec CSS et affichée sans erreur", "Rapport Markdown structuré (résumé, preuve, recommandation)", "Permissions appliquées correctement sur le dossier rapport"]
+  },
+  quiz: [
+    { q: "Quel outil de VS Code permet de prévisualiser instantanément une page HTML modifiée ?", options: ["GitLens", "Live Server", "Remote-SSH", "Hex Editor"], correct: 1, explanation: "Live Server, installé en S1, lance un serveur local et rafraîchit automatiquement le navigateur à chaque sauvegarde." },
+    { q: "Quelle commande Linux permet de rendre un dossier accessible uniquement en lecture pour son propriétaire ?", options: ["chmod 400", "rm -rf", "grep -r", "mv -i"], correct: 0, explanation: "chmod modifie les permissions Unix ; 400 retire l'écriture et l'exécution, ne laissant que la lecture au propriétaire." },
+    { q: "En HTML, quelle balise regroupe logiquement un ensemble de contenus liés (ex. un chapitre du rapport) ?", options: ["<section>", "<style>", "<script>", "<meta>"], correct: 0, explanation: "<section> délimite une partie autonome du document, une brique de base de la structuration HTML vue en S4." },
+    { q: "Que permet principalement CSS par rapport à HTML seul ?", options: ["D'exécuter des commandes serveur", "De mettre en forme visuellement le contenu structuré par le HTML", "De remplacer le terminal", "De chiffrer une page web"], correct: 1, explanation: "CSS (S5) sépare le contenu (HTML) de sa présentation visuelle : couleurs, mise en page, typographie." },
+    { q: "Quel est le score minimum attendu à ce quiz de synthèse pour considérer l'UV1 validée ?", options: ["50%", "60%", "70%", "100% obligatoirement"], correct: 2, explanation: "Comme pour tous les quiz du parcours HACKINÉTIQUE, la norme de réussite est fixée à 70% des bonnes réponses." }
+  ]
 }
 ];
 
@@ -383,7 +427,7 @@ const PHASE2 = [
   title: "Modèle OSI et TCP/IP",
   level: "intermediaire",
   duration: "Semaine 7 · ~6h",
-  intro: "Comprendre un réseau, c'est d'abord comprendre comment les données voyagent d'une machine à une autre. Cette semaine ouvre la Phase 2 avec les deux modèles théoriques utilisés par tous les professionnels du réseau et de la cybersécurité : le modèle OSI (ISO/IEC 7498-1) et le modèle TCP/IP. Sans ces fondations, impossible de lire une capture Wireshark, de configurer un pare-feu ou de comprendre une attaque réseau.",
+  intro: "Comprendre un réseau, c'est d'abord comprendre comment les données voyagent d'une machine à une autre. Cette semaine ouvre l'UV2 avec les deux modèles théoriques utilisés par tous les professionnels du réseau et de la cybersécurité : le modèle OSI (ISO/IEC 7498-1) et le modèle TCP/IP. Sans ces fondations, impossible de lire une capture Wireshark, de configurer un pare-feu ou de comprendre une attaque réseau.",
   objectives: [
     "Identifier et décrire le rôle des 7 couches du modèle OSI.",
     "Comparer le modèle OSI et le modèle TCP/IP en 4 couches.",
@@ -546,7 +590,7 @@ const PHASE2 = [
   deliverable: "Un script Python fonctionnel de scan de ports (module socket), capable de tester une plage de ports sur une cible, d'afficher les ports ouverts et d'enregistrer les résultats dans un fichier texte, accompagné de commentaires explicatifs.",
   tp: {
     title: "TP S9 — Développer un scanner de ports en Python",
-    objectif: "Consolider les bases Python en produisant un outil réseau fonctionnel, premier jalon avant les outils offensifs des phases suivantes.",
+    objectif: "Consolider les bases Python en produisant un outil réseau fonctionnel, premier jalon avant les outils offensifs des UV suivantes.",
     duree: "90 minutes",
     materiel: ["Python 3 installé", "VS Code avec l'extension Python", "Une machine cible autorisée (VM locale ou localhost)"],
     consignes: [
@@ -699,10 +743,10 @@ const PHASE2 = [
 },
 {
   id: "S12", week: 12, phase: 2,
-  title: "Projet de phase 2",
+  title: "Projet de l'UV2",
   level: "intermediaire",
   duration: "Semaine 12 · ~8h",
-  intro: "Cette semaine clôture la Phase 2 par un projet intégrateur : concevoir, configurer, tester et documenter un mini réseau sécurisé qui mobilise l'ensemble des compétences acquises depuis la semaine 7 — adressage, protocoles, segmentation VLAN, scripting Python et filtrage pare-feu. C'est aussi un exercice de documentation technique, compétence attendue de tout professionnel de la cybersécurité.",
+  intro: "Cette semaine clôture l'UV2 par un projet intégrateur : concevoir, configurer, tester et documenter un mini réseau sécurisé qui mobilise l'ensemble des compétences acquises depuis la semaine 7 — adressage, protocoles, segmentation VLAN, scripting Python et filtrage pare-feu. C'est aussi un exercice de documentation technique, compétence attendue de tout professionnel de la cybersécurité.",
   objectives: [
     "Concevoir l'architecture complète d'un mini réseau sécurisé.",
     "Configurer les machines, VLAN et règles de pare-feu du réseau conçu.",
@@ -733,10 +777,10 @@ const PHASE2 = [
     { text: "Documenter intégralement l'architecture et les résultats de tests.", color: "orange" },
     { text: "Livrable : dossier technique complet du mini réseau sécurisé.", color: "red" }
   ],
-  deliverable: "Un dossier technique complet regroupant le schéma d'architecture, le plan d'adressage, les règles de pare-feu justifiées, les résultats documentés des tests de connectivité et de filtrage, et une synthèse des choix de sécurité — ce dossier clôt la Phase 2 et sert de référence pour la Phase 3.",
+  deliverable: "Un dossier technique complet regroupant le schéma d'architecture, le plan d'adressage, les règles de pare-feu justifiées, les résultats documentés des tests de connectivité et de filtrage, et une synthèse des choix de sécurité — ce dossier clôt l'UV2 et sert de référence pour l'UV3.",
   tp: {
     title: "TP S12 — Projet intégrateur : mini réseau sécurisé documenté",
-    objectif: "Mobiliser l'ensemble des compétences de la Phase 2 (adressage, VLAN, pare-feu, tests, documentation) dans un projet unique et cohérent.",
+    objectif: "Mobiliser l'ensemble des compétences de l'UV2 (adressage, VLAN, pare-feu, tests, documentation) dans un projet unique et cohérent.",
     duree: "3–4 heures (réparties sur la semaine)",
     materiel: ["Packet Tracer/GNS3 ou VM Linux", "Outils du TP S9 (script Python) et S11 (iptables/UFW)", "Éditeur de documents pour le dossier technique"],
     consignes: [
@@ -749,7 +793,7 @@ const PHASE2 = [
       "Relire le dossier et vérifier qu'un tiers pourrait reproduire l'architecture à partir des seules informations fournies."
     ],
     livrable: "Dossier technique complet (schéma, plan d'adressage, configuration, résultats de tests, synthèse) accompagné du fichier de simulation ou des captures de configuration réelle.",
-    criteres: ["L'architecture comporte au moins 2 segments isolés avec une politique de filtrage cohérente", "Les tests de connectivité et de filtrage sont documentés avec commande, résultat attendu et résultat obtenu", "Le dossier technique est complet, structuré et compréhensible par un tiers", "Les choix de sécurité sont justifiés et cohérents avec les standards vus en Phase 2 (NIST SP 800-41)"]
+    criteres: ["L'architecture comporte au moins 2 segments isolés avec une politique de filtrage cohérente", "Les tests de connectivité et de filtrage sont documentés avec commande, résultat attendu et résultat obtenu", "Le dossier technique est complet, structuré et compréhensible par un tiers", "Les choix de sécurité sont justifiés et cohérents avec les standards vus en UV2 (NIST SP 800-41)"]
   },
   quiz: [
     { q: "Quelle est la première étape d'une méthodologie de projet réseau professionnelle ?", options: ["La configuration des équipements", "L'analyse du besoin et la conception", "La rédaction de la documentation", "Le test de connectivité"], correct: 1, explanation: "Une méthodologie rigoureuse commence toujours par l'analyse du besoin et la conception (schéma, plan d'adressage), avant toute implémentation technique." },
@@ -757,6 +801,49 @@ const PHASE2 = [
     { q: "Que doit obligatoirement contenir un test documenté de connectivité ou de filtrage ?", options: ["Uniquement une capture d'écran", "La commande utilisée, le résultat attendu et le résultat obtenu", "Le nom de l'étudiant uniquement", "Une estimation du temps de réponse"], correct: 1, explanation: "Un test documenté professionnellement doit permettre la traçabilité : commande exécutée, résultat attendu, résultat réellement obtenu, pour être reproductible et vérifiable." },
     { q: "Quel référentiel est cité en semaine 12 pour la documentation des contrôles de sécurité réseau ?", options: ["ISO/IEC 27001 — Annexe A", "IEEE 802.11", "RFC 791", "PEP 8"], correct: 0, explanation: "L'ISO/IEC 27001:2022, dans son Annexe A, définit des contrôles de sécurité réseau qui inspirent la structure d'une documentation technique professionnelle." },
     { q: "Pourquoi la documentation technique est-elle considérée comme un livrable aussi important que la configuration elle-même ?", options: ["Parce que la loi l'exige systématiquement", "Parce qu'elle assure la traçabilité et permet à un tiers de maintenir le réseau", "Parce qu'elle remplace les tests de sécurité", "Parce qu'elle est plus rapide à produire que la configuration"], correct: 1, explanation: "Sans documentation, un réseau fonctionnel devient impossible à maintenir ou auditer par un tiers ; la documentation garantit la traçabilité et la continuité, exigence centrale des référentiels professionnels." }
+  ]
+},
+{
+  id: "UV2-SYNTH", week: 12, phase: 2,
+  title: "Synthèse d'UV2 — TP et Quiz de validation",
+  level: "intermediaire",
+  duration: "Fin d'UV2 · ~3h",
+  intro: "Ce module de synthèse clôt officiellement l'UV2. Il complète le projet intégrateur de la semaine 12 par un TP qui relie explicitement modèles réseau, protocoles, scripting Python et pare-feu, puis par un quiz transversal conditionnant le passage à l'UV3 (Outils de Cybersécurité).",
+  objectives: [
+    "Relier le modèle OSI/TCP-IP aux protocoles fondamentaux étudiés (DNS, HTTP, etc.).",
+    "Réutiliser un script Python réseau pour vérifier un comportement de pare-feu.",
+    "Justifier une règle de filtrage à partir d'une architecture segmentée en VLAN.",
+    "Restituer le vocabulaire réseau et sécurité systémique des semaines 7 à 12.",
+    "Valider par un quiz transversal les acquis des six semaines de l'UV2."
+  ],
+  definition: "Bilan de fin d'UV2 : un TP qui fait dialoguer script Python, capture réseau et règles de pare-feu autour d'un même scénario, suivi d'un quiz de validation transversal (norme de réussite 70%) conditionnant le passage à l'UV3.",
+  lesson: [
+    { heading: "Faire dialoguer les outils de l'UV2", html: "<p>Isolément, un scan Python (S9), une architecture VLAN (S10) et une règle iptables/UFW (S11) sont des exercices distincts. Ce module de synthèse demande de les faire fonctionner <strong>ensemble sur un même scénario</strong> : un script Python vérifie qu'un port est bien fermé après application d'une règle de pare-feu — exactement la démarche qu'un analyste réseau applique en conditions réelles.</p>" },
+    { heading: "Ce que couvre le quiz de validation", html: "<p>Le quiz reprend les notions clés de S7 à S12 : couches OSI/TCP-IP, rôle de DNS/HTTP, syntaxe de base d'un script Python réseau, principes de segmentation VLAN et logique d'une règle de pare-feu. Un score inférieur à 70% signale qu'il faut revoir une ou plusieurs semaines avant de démarrer l'UV3.</p>" }
+  ],
+  standards: ["NIST SP 800-41 Rev.1 — Guidelines on Firewalls and Firewall Policy", "CompTIA Network+ / Security+ — architecture et sécurité réseau"],
+  tp: {
+    title: "TP de synthèse UV2 — Vérifier une règle de pare-feu avec un script Python",
+    objectif: "Combiner script Python, architecture segmentée et règle de pare-feu pour prouver, preuve technique à l'appui, qu'une politique de filtrage est correctement appliquée.",
+    duree: "2 à 3 heures",
+    materiel: ["VM Linux ou environnement du TP S10/S11 (VLAN + pare-feu configurés)", "Interpréteur Python 3", "Script de scan de ports du TP S9"],
+    consignes: [
+      "Reprendre l'architecture à deux segments du TP S12 (VLAN Admin / VLAN Invités).",
+      "Vérifier, avec le script Python de la semaine 9, que le port administratif du VLAN Admin est bien inaccessible depuis le VLAN Invités.",
+      "Modifier une règle iptables/UFW pour autoriser temporairement l'accès, puis relancer le script pour observer le changement de résultat.",
+      "Remettre la règle de filtrage initiale (restrictive) et confirmer avec le script que la protection est restaurée.",
+      "Documenter dans un tableau les trois états testés : règle initiale, règle modifiée, règle restaurée, avec le résultat du script pour chacun.",
+      "Rédiger une courte conclusion reliant le résultat du script à la couche OSI/TCP-IP concernée (couche transport/application)."
+    ],
+    livrable: "Tableau des trois états testés + script Python utilisé + conclusion rédigée.",
+    criteres: ["Le script détecte correctement l'état ouvert/fermé du port dans les trois configurations", "La règle de pare-feu modifiée puis restaurée est documentée avec la commande exacte", "La conclusion relie correctement le test au modèle OSI/TCP-IP", "Présentation claire et reproductible du tableau de résultats"]
+  },
+  quiz: [
+    { q: "À quelle couche du modèle OSI appartient le protocole HTTP ?", options: ["Couche physique", "Couche réseau", "Couche application", "Couche liaison de données"], correct: 2, explanation: "HTTP est un protocole de couche application (couche 7), qui s'appuie sur les couches inférieures pour le transport effectif des données." },
+    { q: "Quel module Python est le plus couramment utilisé pour créer un socket réseau simple ?", options: ["os", "socket", "json", "re"], correct: 1, explanation: "Le module `socket` de la bibliothèque standard Python permet d'ouvrir des connexions réseau de bas niveau, base des scripts de scan vus en S9." },
+    { q: "Pourquoi segmenter un réseau en VLAN distincts (Admin / Invités) ?", options: ["Pour améliorer uniquement l'esthétique du schéma réseau", "Pour limiter la surface d'attaque en isolant les niveaux de confiance", "Parce que c'est obligatoire pour utiliser Wi-Fi", "Pour réduire le nombre d'adresses IP nécessaires"], correct: 1, explanation: "La segmentation applique le principe de moindre privilège : un segment compromis n'accède pas automatiquement aux ressources sensibles d'un autre segment." },
+    { q: "Quelle commande permet d'ajouter une règle de blocage entre deux sous-réseaux avec iptables ?", options: ["iptables -A FORWARD -s <source> -d <dest> -j DROP", "ping -c 4 <dest>", "nmap -sV <dest>", "ls -la /etc/iptables"], correct: 0, explanation: "La règle FORWARD avec la cible DROP bloque le trafic transitant entre deux réseaux via le pare-feu/routeur, comme vu en S11-S12." },
+    { q: "Quel est le score minimum attendu à ce quiz de synthèse pour considérer l'UV2 validée ?", options: ["50%", "60%", "70%", "100% obligatoirement"], correct: 2, explanation: "Comme pour tous les quiz du parcours HACKINÉTIQUE, la norme de réussite est fixée à 70% des bonnes réponses." }
   ]
 }
 ];
@@ -767,7 +854,7 @@ const PHASE3 = [
     title: "Prise en main de Kali Linux",
     level: "avance",
     duration: "Semaine 13 · ~8h",
-    intro: "La Phase 3 d'HACKINÉTIQUE ouvre la partie la plus offensive du programme : le test d'intrusion. Avant de scanner, d'exploiter ou de post-exploiter quoi que ce soit, chaque futur pentester doit installer son arsenal — Kali Linux — et, plus important encore, signer et intérioriser une charte éthique. Sans autorisation écrite, aucune technique enseignée ici ne doit jamais être exécutée en dehors d'un laboratoire.",
+    intro: "L'UV3 d'HACKINÉTIQUE ouvre la partie la plus offensive du programme : le test d'intrusion. Avant de scanner, d'exploiter ou de post-exploiter quoi que ce soit, chaque futur pentester doit installer son arsenal — Kali Linux — et, plus important encore, signer et intérioriser une charte éthique. Sans autorisation écrite, aucune technique enseignée ici ne doit jamais être exécutée en dehors d'un laboratoire.",
     objectives: [
       "Installer et configurer Kali Linux dans une machine virtuelle isolée.",
       "Identifier les grandes familles d'outils Kali (recon, exploitation, post-exploitation, forensics).",
@@ -1086,10 +1173,10 @@ const PHASE3 = [
 
   {
     id: "S18", week: 18, phase: 3,
-    title: "Projet de phase 3 — Mini CTF",
+    title: "Projet de l'UV3 — Mini CTF",
     level: "avance",
     duration: "Semaine 18 · ~10h",
-    intro: "Cette semaine conclut la Phase 3 par une mise en pratique intégrée : un mini Capture The Flag (CTF) sur la plateforme légale TryHackMe. L'objectif n'est plus d'apprendre un outil isolé, mais de mobiliser toute la chaîne méthodologique acquise depuis S13 — reconnaissance, analyse web, injection, exploitation — face à des machines inconnues, dans un cadre 100% légal et encadré.",
+    intro: "Cette semaine conclut l'UV3 par une mise en pratique intégrée : un mini Capture The Flag (CTF) sur la plateforme légale TryHackMe. L'objectif n'est plus d'apprendre un outil isolé, mais de mobiliser toute la chaîne méthodologique acquise depuis S13 — reconnaissance, analyse web, injection, exploitation — face à des machines inconnues, dans un cadre 100% légal et encadré.",
     objectives: [
       "S'inscrire et se repérer sur une plateforme de CTF légale (TryHackMe).",
       "Résoudre méthodiquement au moins deux machines de niveau débutant/intermédiaire.",
@@ -1111,7 +1198,7 @@ const PHASE3 = [
       { heading: "Méthodologie de résolution d'une machine CTF", html: "<p>La résolution suit la même logique que les semaines précédentes, appliquée cette fois à une cible inconnue :</p><ul><li><strong>Reconnaissance</strong> : scan Nmap complet pour cartographier les services exposés.</li><li><strong>Énumération</strong> : approfondissement de chaque service (web, FTP, SMB...) avec les outils adaptés (ZAP, SQLmap si pertinent, énumération manuelle).</li><li><strong>Exploitation</strong> : recherche et utilisation d'un exploit (Metasploit ou manuel) pour obtenir un accès initial.</li><li><strong>Privilege escalation</strong> : élévation de privilèges pour atteindre le flag final (souvent situé dans un répertoire administrateur).</li></ul><pre><code># Exemple de démarrage de résolution (cible TryHackMe attribuée à l'apprenant)\nnmap -sV -A 10.10.x.x -oN recon_machine1.txt</code></pre>" },
       { heading: "Documenter chaque étape en temps réel", html: "<p>La rigueur de documentation est aussi importante que la résolution elle-même : chaque commande exécutée, chaque résultat obtenu et chaque hypothèse testée (même infructueuse) doivent être notés au fur et à mesure, pas reconstitués après coup. Cette discipline reproduit exactement les exigences d'un rapport de pentest professionnel.</p>" },
       { heading: "Le débriefing collectif", html: "<p>Après résolution individuelle ou en petit groupe, un débriefing collectif permet de comparer les cheminements : plusieurs voies mènent souvent au même flag, et confronter les approches (outils choisis, ordre des étapes, rabbit holes rencontrés) est l'un des apprentissages les plus formateurs du CTF — une pratique courante dans les équipes de pentest professionnelles (peer review).</p>" },
-      { heading: "Rédiger un write-up professionnel", html: "<p>Un write-up de qualité professionnelle suit une structure claire : résumé de la machine, reconnaissance (résultats Nmap), énumération détaillée, chaîne d'exploitation pas à pas (avec commandes et captures), élévation de privilèges, flags obtenus, et enfin les leçons retenues. C'est ce document qui constitue le livrable final de toute la Phase 3.</p>" }
+      { heading: "Rédiger un write-up professionnel", html: "<p>Un write-up de qualité professionnelle suit une structure claire : résumé de la machine, reconnaissance (résultats Nmap), énumération détaillée, chaîne d'exploitation pas à pas (avec commandes et captures), élévation de privilèges, flags obtenus, et enfin les leçons retenues. C'est ce document qui constitue le livrable final de toute l'UV3.</p>" }
     ],
     standards: ["PTES — Méthodologie complète (Pre-engagement à Reporting)", "MITRE ATT&CK — Tactiques Reconnaissance, Initial Access, Execution, Privilege Escalation", "EC-Council CEH / eJPT — Méthodologie d'examen pratique"],
     steps: [
@@ -1122,10 +1209,10 @@ const PHASE3 = [
       { text: "Participer au débriefing collectif et comparer les approches.", color: "blue" },
       { text: "Livrable : write-up de CTF complet et professionnel.", color: "red" }
     ],
-    deliverable: "Un write-up de CTF professionnel (Markdown ou PDF) couvrant la résolution complète de deux machines TryHackMe, structuré en reconnaissance, énumération, exploitation, élévation de privilèges et leçons retenues, clôturant la Phase 3 du programme HACKINÉTIQUE.",
+    deliverable: "Un write-up de CTF professionnel (Markdown ou PDF) couvrant la résolution complète de deux machines TryHackMe, structuré en reconnaissance, énumération, exploitation, élévation de privilèges et leçons retenues, clôturant l'UV3 du programme HACKINÉTIQUE.",
     tp: {
       title: "TP S18 — Mini CTF encadré sur TryHackMe",
-      objectif: "Mobiliser l'ensemble des compétences acquises en Phase 3 (reconnaissance, analyse web, injection, exploitation) pour résoudre deux machines CTF légales et en rédiger un write-up professionnel.",
+      objectif: "Mobiliser l'ensemble des compétences acquises en UV3 (reconnaissance, analyse web, injection, exploitation) pour résoudre deux machines CTF légales et en rédiger un write-up professionnel.",
       duree: "3 à 5 heures (réparties sur la semaine)",
       materiel: ["VM Kali Linux complète (Nmap, ZAP, SQLmap, Metasploit)", "Compte TryHackMe et accès VPN configuré", "Deux machines TryHackMe de niveau débutant/intermédiaire assignées par l'instructeur"],
       consignes: [
@@ -1141,11 +1228,54 @@ const PHASE3 = [
       criteres: ["Les deux machines sont résolues (ou la démarche est documentée avec justification en cas de blocage partiel).", "Chaque étape (reconnaissance, énumération, exploitation, élévation de privilèges) est clairement documentée avec preuves.", "Le write-up respecte une structure professionnelle claire et lisible.", "L'apprenant a activement participé au débriefing collectif et intègre les retours dans sa réflexion finale."]
     },
     quiz: [
-      { q: "Pourquoi TryHackMe constitue-t-il un cadre légal approprié pour ce projet final de Phase 3 ?", options: ["Parce que la plateforme est gratuite", "Parce que les machines sont hébergées et explicitement mises à disposition par la plateforme pour l'entraînement légal", "Parce qu'aucune règle n'encadre son utilisation", "Parce qu'elle ne nécessite pas de VPN"], correct: 1, explanation: "TryHackMe héberge des machines volontairement vulnérables dans une infrastructure dédiée, dont l'exploitation par les utilisateurs inscrits est explicitement autorisée par les conditions d'utilisation de la plateforme." },
+      { q: "Pourquoi TryHackMe constitue-t-il un cadre légal approprié pour ce projet final de l'UV3 ?", options: ["Parce que la plateforme est gratuite", "Parce que les machines sont hébergées et explicitement mises à disposition par la plateforme pour l'entraînement légal", "Parce qu'aucune règle n'encadre son utilisation", "Parce qu'elle ne nécessite pas de VPN"], correct: 1, explanation: "TryHackMe héberge des machines volontairement vulnérables dans une infrastructure dédiée, dont l'exploitation par les utilisateurs inscrits est explicitement autorisée par les conditions d'utilisation de la plateforme." },
       { q: "Qu'est-ce qu'un « rabbit hole » dans le contexte d'un CTF ?", options: ["Le flag final d'une machine", "Une piste d'investigation qui semble prometteuse mais s'avère être une impasse", "Un type de payload Metasploit", "Le nom d'une catégorie de vulnérabilité OWASP"], correct: 1, explanation: "Un rabbit hole désigne une piste de recherche qui consomme du temps sans mener à une avancée réelle vers la compromission ; savoir l'identifier rapidement est une compétence essentielle du pentester." },
       { q: "Dans la méthodologie de résolution d'une machine CTF, que vient faire l'étape de « privilege escalation » ?", options: ["Elle scanne les ports ouverts de la machine", "Elle élève les privilèges d'un accès initial limité vers un accès administrateur/root", "Elle chiffre les communications avec la cible", "Elle génère automatiquement le write-up final"], correct: 1, explanation: "La privilege escalation intervient après un accès initial (souvent avec des droits limités) et vise à obtenir des privilèges plus élevés, généralement nécessaires pour atteindre le flag administrateur final." },
       { q: "Quel est l'intérêt principal du débriefing collectif après la résolution des machines CTF ?", options: ["Il permet d'obtenir automatiquement plus de flags", "Il permet de comparer les approches, identifier des méthodes alternatives et partager les rabbit holes rencontrés", "Il remplace la rédaction du write-up", "Il est purement administratif et sans valeur pédagogique"], correct: 1, explanation: "Le débriefing collectif reproduit une pratique professionnelle courante (peer review) : confronter différentes méthodologies pour un même objectif enrichit considérablement l'apprentissage individuel." },
       { q: "Quelle section ne doit JAMAIS manquer dans un write-up de CTF professionnel ?", options: ["Une liste des autres apprenants du groupe", "La reconnaissance initiale (résultats Nmap) et la chaîne d'exploitation détaillée étape par étape", "Le prix d'achat de la licence TryHackMe", "Une critique du design de l'interface TryHackMe"], correct: 1, explanation: "Un write-up professionnel doit permettre à un tiers de reproduire intégralement la démarche : il documente donc systématiquement la reconnaissance et chaque étape de la chaîne d'exploitation jusqu'au flag final." }
+    ]
+  },
+  {
+    id: "UV3-SYNTH", week: 18, phase: 3,
+    title: "Synthèse d'UV3 — TP et Quiz de validation",
+    level: "avance",
+    duration: "Fin d'UV3 · ~3h",
+    intro: "Ce module de synthèse clôt officiellement l'UV3. Il complète le mini CTF de la semaine 18 par un TP qui enchaîne explicitement Nmap, ZAP/Burp, SQLmap et Metasploit sur une même cible, puis par un quiz transversal conditionnant le passage à l'UV4 (Défense & Professionnalisation).",
+    objectives: [
+      "Enchaîner reconnaissance (Nmap), analyse web (OWASP/ZAP), injection (SQLmap) et exploitation (Metasploit) sur un même laboratoire.",
+      "Justifier le choix de chaque outil à l'étape correspondante de la méthodologie PTES.",
+      "Documenter une chaîne d'attaque complète comme un dossier de test d'intrusion.",
+      "Restituer le vocabulaire offensif des semaines 13 à 18.",
+      "Valider par un quiz transversal les acquis des six semaines de l'UV3."
+    ],
+    definition: "Bilan de fin d'UV3 : un TP qui rejoue, cible unique et cadre légal (DVWA/WebGoat ou machine TryHackMe), la chaîne complète reconnaissance → analyse web → injection → exploitation, suivi d'un quiz de validation transversal (norme de réussite 70%) conditionnant le passage à l'UV4.",
+    lesson: [
+      { heading: "Faire dialoguer les outils de l'UV3", html: "<p>Chaque semaine de l'UV3 a isolé un outil (Nmap en S14, ZAP/Burp en S15, SQLmap en S16, Metasploit en S17). Ce module de synthèse demande de les enchaîner sur une <strong>même cible légale</strong>, exactement comme le fait un pentester professionnel suivant la méthodologie PTES d'une reconnaissance jusqu'à l'exploitation.</p>" },
+      { heading: "Ce que couvre le quiz de validation", html: "<p>Le quiz reprend les notions clés de S13 à S18 : prise en main de Kali, syntaxe de base Nmap, principes OWASP Top 10, mécanique d'une injection SQL, structure d'un module Metasploit, et vocabulaire du CTF (flag, write-up, privilege escalation). Un score inférieur à 70% signale qu'il faut revoir une ou plusieurs semaines avant de démarrer l'UV4.</p>" }
+    ],
+    standards: ["PTES — Penetration Testing Execution Standard", "OWASP Top 10", "MITRE ATT&CK — Tactiques Reconnaissance à Exploitation"],
+    tp: {
+      title: "TP de synthèse UV3 — Chaîne d'attaque complète sur cible légale",
+      objectif: "Enchaîner, sur une seule cible autorisée, les quatre grandes étapes offensives de l'UV3 et produire un mini-dossier de test d'intrusion.",
+      duree: "3 à 4 heures",
+      materiel: ["VM Kali Linux complète (Nmap, ZAP/Burp, SQLmap, Metasploit)", "Cible légale : DVWA ou OWASP Juice Shop sur réseau isolé", "Modèle de rapport d'audit simplifié"],
+      consignes: [
+        "Réaliser un scan Nmap complet de la cible et consigner les services et versions détectés.",
+        "Analyser l'application web avec ZAP/Burp et identifier au moins une faiblesse liée à l'OWASP Top 10.",
+        "Tester la présence d'une injection SQL avec SQLmap sur un paramètre identifié lors de l'analyse.",
+        "Si une vulnérabilité exploitable est confirmée, tenter une exploitation encadrée avec Metasploit (ou documenter la tentative si elle échoue).",
+        "Rédiger un mini-dossier reliant les quatre étapes : reconnaissance → analyse web → injection → exploitation, avec preuve à chaque étape.",
+        "Conclure par une synthèse des risques identifiés et des recommandations de remédiation priorisées."
+      ],
+      livrable: "Mini-dossier de test d'intrusion (Markdown ou PDF) couvrant les quatre étapes avec preuves et recommandations.",
+      criteres: ["Les quatre outils (Nmap, ZAP/Burp, SQLmap, Metasploit) sont mobilisés dans un ordre méthodologique cohérent", "Chaque étape est documentée avec commande et résultat", "Au moins une vulnérabilité est identifiée et argumentée", "Recommandations de remédiation claires et priorisées"]
+    },
+    quiz: [
+      { q: "Dans la méthodologie PTES, à quelle étape correspond un scan Nmap initial ?", options: ["Post-exploitation", "Collecte de renseignements / reconnaissance", "Rédaction du rapport", "Pré-engagement"], correct: 1, explanation: "Nmap est l'outil type de la phase de reconnaissance/collecte de renseignements, avant toute tentative d'exploitation." },
+      { q: "Quel outil est spécifiquement conçu pour automatiser la détection et l'exploitation d'injections SQL ?", options: ["Nmap", "SQLmap", "Wireshark", "Snort"], correct: 1, explanation: "SQLmap (S16) automatise la détection et l'exploitation de vulnérabilités d'injection SQL sur des paramètres identifiés." },
+      { q: "Quel référentiel classe les dix risques de sécurité applicative web les plus critiques ?", options: ["OWASP Top 10", "RFC 791", "IEEE 802.3", "CVSS"], correct: 0, explanation: "L'OWASP Top 10, étudié en S15, référence les dix catégories de vulnérabilités web les plus critiques et les plus fréquentes." },
+      { q: "Que permet Metasploit dans une chaîne d'attaque légale sur cible autorisée ?", options: ["Uniquement scanner des ports", "Structurer et exécuter des modules d'exploitation contre une vulnérabilité identifiée", "Remplacer la rédaction du rapport", "Chiffrer le trafic réseau"], correct: 1, explanation: "Metasploit (S17) fournit un framework structuré de modules d'exploitation, à utiliser exclusivement sur des cibles autorisées." },
+      { q: "Quel est le score minimum attendu à ce quiz de synthèse pour considérer l'UV3 validée ?", options: ["50%", "60%", "70%", "100% obligatoirement"], correct: 2, explanation: "Comme pour tous les quiz du parcours HACKINÉTIQUE, la norme de réussite est fixée à 70% des bonnes réponses." }
     ]
   }
 ];
@@ -1473,31 +1603,31 @@ const PHASE4 = [
 },
 {
   id: "S24", week: 24, phase: 4,
-  title: "Soutenance & clôture",
+  title: "Examen final",
   level: "expert",
   duration: "Semaine 24 · ~8h",
-  intro: "Dernière ligne droite du parcours HACKINÉTIQUE : présenter son projet final devant un jury, défendre ses choix techniques et méthodologiques, recevoir un retour constructif, puis clôturer officiellement 24 semaines de formation avec la remise de l'attestation.",
+  intro: "Dernière ligne droite du parcours HACKINÉTIQUE : l'examen final. Il combine la soutenance du projet réalisé en S23 devant un jury et une évaluation transversale des compétences des quatre UV. Sa réussite (soutenance validée + quiz transversal ≥ 70%) conditionne la délivrance du certificat professionnel HACKINÉTIQUE.",
   objectives: [
     "Présenter clairement et de façon structurée le projet final devant un jury.",
     "Répondre avec assurance et rigueur technique aux questions du jury.",
     "Analyser un retour constructif pour identifier ses axes de progression.",
-    "Faire la synthèse transversale des compétences validées sur les 24 semaines du programme.",
-    "Clôturer officiellement le parcours et recevoir l'attestation HACKINÉTIQUE."
+    "Faire la synthèse transversale des compétences validées sur les quatre UV du programme.",
+    "Réussir l'examen final et remplir les conditions d'obtention du certificat professionnel HACKINÉTIQUE."
   ],
-  definition: "La soutenance est la présentation orale, argumentée et démontrée du projet final devant un jury évaluateur, suivie d'une session de questions-réponses techniques. Elle valide l'ensemble des compétences acquises sur les quatre phases du programme (fondamentaux, attaque web/réseau, exploitation avancée, défense/professionnalisation) et débouche sur la remise de l'attestation HACKINÉTIQUE, marquant la clôture officielle du parcours.",
-  analogy: { title: "🎯 La soutenance comme mission de conseil réelle", text: "Une soutenance ressemble à la restitution finale d'une mission de conseil en cybersécurité : le client (le jury) attend une présentation claire, des preuves tangibles, et sait qu'il posera des questions pièges pour vérifier que la compréhension dépasse la simple exécution de commandes." },
+  definition: "L'examen final HACKINÉTIQUE est l'évaluation terminale du programme : elle comprend la soutenance orale, argumentée et démontrée du projet final devant un jury évaluateur, ainsi qu'un quiz transversal couvrant l'ensemble des quatre UV. Elle valide l'ensemble des compétences acquises (fondamentaux, réseaux/systèmes, outils offensifs, défense/professionnalisation) et sa réussite conditionne la délivrance du certificat professionnel HACKINÉTIQUE.",
+  analogy: { title: "🎯 L'examen final comme mission de conseil réelle", text: "L'examen final ressemble à la restitution finale d'une mission de conseil en cybersécurité : le client (le jury) attend une présentation claire, des preuves tangibles, et sait qu'il posera des questions pièges pour vérifier que la compréhension dépasse la simple exécution de commandes." },
   keyTerms: [
-    { term: "Jury", def: "Groupe d'évaluateurs (formateurs, professionnels) chargé d'apprécier la qualité du projet et de la présentation." },
+    { term: "Jury", def: "Groupe d'évaluateurs (formateurs, professionnels) chargé d'apprécier la qualité du projet et de la présentation lors de l'examen final." },
     { term: "Grille d'évaluation", def: "Ensemble de critères objectifs utilisés par le jury pour noter la prestation (fond technique, forme, maîtrise)." },
     { term: "Retour constructif (feedback)", def: "Analyse argumentée des points forts et axes d'amélioration formulée à l'issue d'une évaluation." },
-    { term: "Attestation HACKINÉTIQUE", def: "Document officiel délivré par CJEPE-BENIN certifiant la validation des compétences du programme de 24 semaines." }
+    { term: "Certificat professionnel HACKINÉTIQUE", def: "Document officiel délivré par CJEPE-BENIN certifiant la validation des compétences du programme de 24 semaines, remis après réussite de l'examen final." }
   ],
   lesson: [
     { heading: "Structurer une présentation de soutenance efficace", html: "<p>Une présentation de 15 à 20 minutes suit généralement une structure éprouvée : <strong>contexte et objectifs</strong> (2 min), <strong>démarche méthodologique</strong> (5 min), <strong>démonstration technique</strong> (5-7 min), <strong>résultats et recommandations</strong> (3 min), puis <strong>conclusion et retour d'expérience</strong> (2 min). Chaque slide doit porter une seule idée forte ; les détails techniques exhaustifs restent dans le rapport écrit, pas dans les slides.</p>" },
     { heading: "Anticiper et répondre aux questions du jury", html: "<p>Les questions de jury portent typiquement sur trois axes : la <strong>justification des choix techniques</strong> (« pourquoi Snort plutôt qu'un autre IDS ? »), les <strong>limites du travail réalisé</strong> (« qu'auriez-vous fait avec plus de temps ? ») et la <strong>compréhension conceptuelle</strong> au-delà de l'exécution (« que se passerait-il si l'attaquant chiffrait son trafic ? »). Une bonne réponse reconnaît honnêtement les limites plutôt que de les dissimuler — un candidat qui admet une limite argumentée inspire davantage confiance qu'un candidat qui prétend à la perfection.</p>" },
     { heading: "Exploiter le retour constructif du jury", html: "<p>Le feedback du jury doit être noté et analysé, pas seulement écouté. Exemple de grille d'auto-évaluation post-soutenance :</p><pre><code>Grille d'auto-évaluation post-soutenance\n--------------------------------------\n[ ] Clarté du contexte et des objectifs présentés\n[ ] Rigueur de la démarche méthodologique (PTES respecté)\n[ ] Fiabilité de la démonstration technique\n[ ] Pertinence des recommandations formulées\n[ ] Qualité des réponses aux questions techniques\n[ ] Gestion du temps de présentation</code></pre><p>Ce type de grille, utilisée également en amont comme outil de répétition, permet d'objectiver sa propre progression.</p>" },
-    { heading: "Synthèse transversale des 24 semaines du programme", html: "<p>Le parcours HACKINÉTIQUE relie quatre grandes compétences professionnelles : la maîtrise d'un environnement technique (Phase 1), la capacité à identifier et exploiter des vulnérabilités web et réseau dans un cadre légal (Phase 2 et 3), et la capacité à détecter, investiguer et défendre un système d'information (Phase 4). Cette boucle complète attaque-défense-audit-documentation est précisément ce qu'attendent les référentiels professionnels comme le NIST CSF (couvrant Identify, Protect, Detect, Respond, Recover) et les certifications CompTIA (Security+, PenTest+, CySA+).</p>" },
-    { heading: "Clôture officielle et remise de l'attestation", html: "<p>La remise de l'attestation HACKINÉTIQUE marque la fin formelle du programme, mais aussi le début d'un parcours professionnel continu : veille technique (CVE, MITRE ATT&CK), pratique régulière (CTF, plateformes de labs), et poursuite éventuelle vers des certifications reconnues (CompTIA Security+/PenTest+/CySA+, eJPT, OSCP). L'éthique professionnelle — autorisation écrite systématique, respect du périmètre, confidentialité des données clients — reste le socle non négociable de toute pratique future du métier.</p>" }
+    { heading: "Synthèse transversale des quatre UV du programme", html: "<p>Le parcours HACKINÉTIQUE relie quatre grandes compétences professionnelles : la maîtrise d'un environnement technique (UV1), la capacité à comprendre et sécuriser une architecture réseau (UV2), la capacité à identifier et exploiter des vulnérabilités web et réseau dans un cadre légal (UV3), et la capacité à détecter, investiguer et défendre un système d'information (UV4). Cette boucle complète attaque-défense-audit-documentation est précisément ce qu'attendent les référentiels professionnels comme le NIST CSF (couvrant Identify, Protect, Detect, Respond, Recover) et les certifications CompTIA (Security+, PenTest+, CySA+).</p>" },
+    { heading: "Vers le certificat professionnel", html: "<p>La réussite de l'examen final (soutenance validée par le jury et quiz transversal noté au moins 70%) déclenche la délivrance du <strong>certificat professionnel HACKINÉTIQUE</strong>, présenté dans le module suivant. Ce certificat marque la fin formelle du programme, mais aussi le début d'un parcours professionnel continu : veille technique (CVE, MITRE ATT&CK), pratique régulière (CTF, plateformes de labs), et poursuite éventuelle vers des certifications reconnues (CompTIA Security+/PenTest+/CySA+, eJPT, OSCP). L'éthique professionnelle — autorisation écrite systématique, respect du périmètre, confidentialité des données clients — reste le socle non négociable de toute pratique future du métier.</p>" }
   ],
   standards: ["NIST Cybersecurity Framework — synthèse des cinq fonctions (Identify, Protect, Detect, Respond, Recover)", "CompTIA Security+ / PenTest+ / CySA+ — référentiels de certification professionnelle de suite de parcours", "PTES — Penetration Testing Execution Standard (rappel de la structure globale du métier)"],
   steps: [
@@ -1505,13 +1635,13 @@ const PHASE4 = [
     { text: "Répondre aux questions techniques et méthodologiques du jury.", color: "green" },
     { text: "Recevoir et analyser les retours constructifs du jury.", color: "green" },
     { text: "Valider l'ensemble des compétences du programme.", color: "green" },
-    { text: "Recevoir l'attestation officielle HACKINÉTIQUE.", color: "green" },
-    { text: "Livrable : Attestation HACKINÉTIQUE.", color: "red" }
+    { text: "Réussir l'examen final (soutenance + quiz transversal ≥ 70%).", color: "green" },
+    { text: "Livrable : Dossier d'examen final validé, condition d'accès au certificat professionnel.", color: "red" }
   ],
-  deliverable: "Une soutenance réalisée devant jury avec démonstration technique fonctionnelle, une grille d'auto-évaluation complétée à partir du retour du jury, et l'obtention de l'attestation HACKINÉTIQUE.",
+  deliverable: "Un examen final réussi : soutenance réalisée devant jury avec démonstration technique fonctionnelle, grille d'auto-évaluation complétée à partir du retour du jury, et quiz transversal validé à au moins 70% — condition d'obtention du certificat professionnel HACKINÉTIQUE.",
   tp: {
-    title: "TP S24 — Répétition générale et simulation de soutenance",
-    objectif: "Répéter la présentation du projet final dans des conditions proches du réel, s'auto-évaluer avec une grille objective, et ajuster la prestation avant la soutenance officielle.",
+    title: "TP S24 — Préparation à l'examen final (révisions et simulation de soutenance)",
+    objectif: "Réviser transversalement les quatre UV, répéter la présentation du projet final dans des conditions proches du réel, s'auto-évaluer avec une grille objective, et ajuster la prestation avant l'examen final officiel.",
     duree: "2 à 3 heures",
     materiel: ["Support de présentation finalisé (slides ou document)", "Environnement de démonstration du projet final opérationnel", "Grille d'auto-évaluation post-soutenance", "Un pair ou un mentor pour jouer le rôle du jury (facultatif mais recommandé)"],
     consignes: [
@@ -1520,7 +1650,7 @@ const PHASE4 = [
       "Lister par écrit cinq questions probables du jury et préparer une réponse argumentée à chacune.",
       "Faire rejouer la soutenance devant un pair ou mentor jouant le rôle du jury, si possible.",
       "Compléter la grille d'auto-évaluation immédiatement après la répétition, sans complaisance.",
-      "Identifier les deux ou trois points faibles prioritaires et les retravailler avant la soutenance officielle.",
+      "Identifier les deux ou trois points faibles prioritaires et les retravailler avant l'examen final officiel.",
       "Vérifier l'ensemble des livrables du dossier de projet final (rapport, documentation, support) avant le jour J."
     ],
     livrable: "Grille d'auto-évaluation complétée + liste des questions anticipées avec réponses préparées + support de présentation finalisé.",
@@ -1531,8 +1661,42 @@ const PHASE4 = [
     { q: "Quelle norme encadre spécifiquement la préservation des preuves numériques lors d'une investigation forensique ?", options: ["ISO/IEC 27001", "ISO/IEC 27037", "PTES", "CVSS"], correct: 1, explanation: "ISO/IEC 27037, vue en semaine 21, définit les lignes directrices d'identification, de collecte et de préservation des preuves numériques." },
     { q: "Sur quel standard s'appuie la structuration d'un rapport d'audit de sécurité professionnel étudiée en semaine 22 ?", options: ["MITRE ATT&CK", "PTES — Penetration Testing Execution Standard", "OSI", "RFC 1918"], correct: 1, explanation: "Le PTES structure l'ensemble d'un audit en sept phases, de la préparation jusqu'au rapport final, socle méthodologique du métier d'auditeur." },
     { q: "Quelle attitude est recommandée face à une question du jury portant sur une limite réelle du projet final ?", options: ["Nier la limite et changer de sujet", "Reconnaître honnêtement la limite et l'argumenter", "Refuser de répondre", "Rejeter la responsabilité sur le matériel utilisé"], correct: 1, explanation: "Reconnaître une limite avec un argumentaire solide démontre une compréhension mature du sujet et inspire davantage confiance qu'une posture défensive." },
-    { q: "Quel principe reste le socle non négociable de toute pratique professionnelle après l'obtention de l'attestation HACKINÉTIQUE ?", options: ["L'usage exclusif d'outils gratuits", "L'autorisation écrite systématique et le respect strict du périmètre autorisé", "Le travail en solitaire uniquement", "L'absence de documentation pour aller plus vite"], correct: 1, explanation: "Quel que soit l'outil ou la mission, l'autorisation écrite préalable et le respect du périmètre défini restent la ligne rouge légale et éthique de toute activité de sécurité offensive ou défensive." }
+    { q: "Quel principe reste le socle non négociable de toute pratique professionnelle après l'obtention du certificat professionnel HACKINÉTIQUE ?", options: ["L'usage exclusif d'outils gratuits", "L'autorisation écrite systématique et le respect strict du périmètre autorisé", "Le travail en solitaire uniquement", "L'absence de documentation pour aller plus vite"], correct: 1, explanation: "Quel que soit l'outil ou la mission, l'autorisation écrite préalable et le respect du périmètre défini restent la ligne rouge légale et éthique de toute activité de sécurité offensive ou défensive." }
   ]
+},
+{
+  id: "CERT", week: 25, phase: 4,
+  title: "Certificat professionnel HACKINÉTIQUE",
+  level: "expert",
+  duration: "Clôture du parcours",
+  intro: "Dernière étape du parcours HACKINÉTIQUE : la remise du certificat professionnel. Ce module récapitule les conditions d'obtention, le contenu exact du certificat délivré par l'Institut CJEPE-BENIN, et les pistes de certification internationale à poursuivre une fois le parcours achevé.",
+  objectives: [
+    "Vérifier que les trois conditions d'obtention du certificat sont remplies.",
+    "Comprendre ce que le certificat professionnel HACKINÉTIQUE atteste concrètement.",
+    "Identifier les certifications internationales à préparer après le certificat HACKINÉTIQUE.",
+    "Formaliser un plan de veille et de pratique continue post-formation."
+  ],
+  definition: "Le certificat professionnel HACKINÉTIQUE est le document officiel délivré par l'Institut CJEPE-BENIN à l'issue des 24 semaines du programme, une fois l'examen final réussi (soutenance validée par le jury et quiz transversal noté au moins 70%) et l'ensemble des livrables hebdomadaires et des TP de synthèse d'UV remis.",
+  keyTerms: [
+    { term: "Certificat professionnel", def: "Document officiel attestant qu'un apprenant a validé l'ensemble des compétences d'un programme de formation, délivré après réussite d'une évaluation terminale." },
+    { term: "Certification internationale", def: "Certification reconnue à l'échelle mondiale (ex. CompTIA Security+, eJPT, OSCP), généralement obtenue via un examen indépendant payant, distincte du certificat délivré par un centre de formation." },
+    { term: "Veille technique", def: "Suivi régulier de l'actualité en cybersécurité (nouvelles CVE, techniques MITRE ATT&CK, outils) permettant de maintenir ses compétences à jour après la formation." }
+  ],
+  lesson: [
+    { heading: "Les trois conditions d'obtention du certificat", html: "<p>Le certificat professionnel HACKINÉTIQUE est délivré lorsque les trois conditions suivantes sont réunies :</p><ul><li><strong>Assiduité et livrables hebdomadaires</strong> : les livrables et quiz des semaines S1 à S23 ont été remis.</li><li><strong>TP de synthèse des quatre UV validés</strong> : les modules de synthèse de fin d'UV1, UV2, UV3 (et le projet/mini-CTF de chaque UV) ont été complétés.</li><li><strong>Examen final réussi</strong> : soutenance validée par le jury et quiz transversal de la semaine S24 noté au moins 70%.</li></ul>" },
+    { heading: "Ce qu'atteste concrètement le certificat", html: "<p>Le certificat professionnel HACKINÉTIQUE atteste la maîtrise des quatre grands blocs de compétences du programme : environnement technique et développement web de base (UV1), architecture et sécurité réseau (UV2), outils et méthodologie de test d'intrusion (UV3), défense, détection et audit de sécurité (UV4). Il précise le nom de l'apprenant, la durée du programme (24 semaines), la date de délivrance et la signature de l'Institut CJEPE-BENIN.</p>" },
+    { heading: "Après le certificat : les certifications internationales", html: "<p>Le certificat professionnel HACKINÉTIQUE prépare, sans s'y substituer, à des certifications internationales reconnues : <strong>CompTIA Security+</strong> (bases transversales de la sécurité), <strong>eJPT</strong> (test d'intrusion pratique d'entrée), et à terme <strong>CompTIA PenTest+/CySA+</strong> ou <strong>OSCP</strong> pour les profils souhaitant se spécialiser en test d'intrusion offensif.</p>" },
+    { heading: "Maintenir ses compétences après la formation", html: "<p>La cybersécurité évolue en continu : nouvelles CVE publiées chaque semaine, nouvelles techniques référencées dans MITRE ATT&CK, nouveaux outils. Un professionnel certifié HACKINÉTIQUE est encouragé à maintenir une pratique régulière (plateformes de CTF légales, laboratoires personnels) et une veille technique active pour rester opérationnel sur le terrain.</p>" }
+  ],
+  standards: ["CompTIA Security+ / PenTest+ / CySA+", "eJPT — eLearnSecurity Junior Penetration Tester", "OSCP — Offensive Security Certified Professional"],
+  steps: [
+    { text: "Vérifier que tous les livrables hebdomadaires (S1-S23) sont remis.", color: "green" },
+    { text: "Vérifier que les TP de synthèse des quatre UV sont validés.", color: "green" },
+    { text: "Confirmer la réussite de l'examen final (S24).", color: "green" },
+    { text: "Recevoir le certificat professionnel HACKINÉTIQUE.", color: "green" },
+    { text: "Livrable : Certificat professionnel HACKINÉTIQUE.", color: "red" }
+  ],
+  deliverable: "Le certificat professionnel HACKINÉTIQUE, délivré par l'Institut CJEPE-BENIN, une fois les trois conditions (livrables hebdomadaires, TP de synthèse d'UV, examen final réussi) remplies."
 }
 ];
 
@@ -1609,7 +1773,7 @@ function renderSidebar(filter) {
 
     const header = document.createElement("button");
     header.className = "phase-group-header";
-    header.innerHTML = `<span>${phaseNum.toString().padStart(2,"0")} · ${meta.title}</span><span class="chev">▾</span>`;
+    header.innerHTML = `<span>UV${phaseNum} · ${meta.title}</span><span class="chev">▾</span>`;
     header.addEventListener("click", () => {
       const list = group.querySelector(".week-list");
       list.classList.toggle("collapsed");
@@ -1645,7 +1809,7 @@ function updateGlobalProgress() {
   const bar = document.getElementById("progressBar");
   const label = document.getElementById("progressLabel");
   if (bar) bar.style.width = pct + "%";
-  if (label) label.textContent = `${done}/${total} semaines · ${pct}%`;
+  if (label) label.textContent = `${done}/${total} étapes · ${pct}%`;
 }
 
 /* ---------------- Main panel ---------------- */
@@ -1685,7 +1849,7 @@ function renderMain() {
       <div class="tag-row">
         <span class="badge-level level-${w.level}">${levelLabel(w.level)}</span>
         <span class="pill pill-orange">${esc(w.duration)}</span>
-        <span class="pill pill-blue" style="background:rgba(255,255,255,0.18); color:#fff;">Phase ${w.phase} · ${esc(PHASE_META[w.phase].title)}</span>
+        <span class="pill pill-blue" style="background:rgba(255,255,255,0.18); color:#fff;">UV${w.phase} · ${esc(PHASE_META[w.phase].title)}</span>
       </div>
       <h1>${esc(w.id)} — ${esc(w.title)}</h1>
       <p>${esc(w.intro || "")}</p>
